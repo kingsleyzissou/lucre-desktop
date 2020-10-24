@@ -1,4 +1,4 @@
-package org.wit.lucre;
+package org.wit.lucre.main;
 
 import mu.KotlinLogging
 
