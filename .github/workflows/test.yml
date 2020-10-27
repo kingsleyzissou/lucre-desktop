@@ -1,4 +1,4 @@
-name: Run Gradle on PRs
+name: Run tests
 on: pull_request
 jobs:
   gradle:
@@ -13,4 +13,4 @@ jobs:
         java-version: 14
     - uses: eskatos/gradle-command-action@v1
       with:
-        arguments: build
+        arguments: test
