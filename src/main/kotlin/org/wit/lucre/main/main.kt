@@ -1,10 +1,10 @@
-package org.wit.lucre.main;
+package org.wit.lucre.main
 
 import mu.KotlinLogging
 
-private val logger = KotlinLogging.logger {};
+private val logger = KotlinLogging.logger {}
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
     logger.info { "Launching Lucre App" }
     println("Lucre Kotlin Desktop App - Version 1.0")
 }
