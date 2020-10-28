@@ -20,6 +20,7 @@ dependencies {
     implementation 'io.github.microutils:kotlin-logging:1.6.22'
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+    testImplementation('io.mockk:mockk:1.10.2')
     ktlint "com.pinterest:ktlint:0.39.0"
     implementation 'com.aventrix.jnanoid:jnanoid:2.0.0'
 }
