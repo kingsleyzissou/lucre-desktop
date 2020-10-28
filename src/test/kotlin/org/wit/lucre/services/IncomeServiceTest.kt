@@ -3,10 +3,9 @@ package org.wit.lucre.services
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.wit.lucre.models.EntryMemoryStore
 import org.wit.lucre.models.EntryModel
 import org.wit.lucre.models.EntryType

@@ -7,14 +7,12 @@ class IncomeService() {
 
     fun balance(entries: List<EntryModel>): Float {
 
-        val values = entries.map{
+        val values = entries.map {
             if (it.type.equals(EntryType.INCOME))
                 it.amount
             else it.amount * -1
         }
 
-        return values.reduce{acc, it -> acc + it}
-
+        return values.reduce { acc, it -> acc + it }
     }
-
 }
