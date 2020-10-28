@@ -23,15 +23,15 @@ internal class IncomeServiceTest {
     @BeforeEach
     fun setup() {
         every { entry1.id } returns NanoIdUtils.randomNanoId()
-        every { entry1.amount } returns 5
+        every { entry1.amount } returns 5F
         every { entry1.type } returns EntryType.EXPENSE
 
         every { entry2.id } returns NanoIdUtils.randomNanoId()
-        every { entry2.amount } returns 10
+        every { entry2.amount } returns 10F
         every { entry2.type } returns EntryType.EXPENSE
 
         every { entry3.id } returns NanoIdUtils.randomNanoId()
-        every { entry3.amount } returns 15
+        every { entry3.amount } returns 15F
         every { entry3.type } returns EntryType.INCOME
 
         store = EntryMemoryStore()
@@ -43,32 +43,32 @@ internal class IncomeServiceTest {
     @Test
     fun balance() {
         var balance = service.balance(store.all())
-        assertEquals(0, balance)
+        assertEquals(0F, balance)
     }
 
     @Test
     fun add() {
         val newEntry = mockk<EntryModel>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
-        every { newEntry.amount } returns 100
+        every { newEntry.amount } returns 100F
         every { newEntry.type } returns EntryType.INCOME
 
         store.create(newEntry)
 
         var balance = service.balance(store.all())
-        assertEquals(100, balance)
+        assertEquals(100F, balance)
     }
 
     @Test
     fun spend() {
         val newEntry = mockk<EntryModel>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
-        every { newEntry.amount } returns 75
+        every { newEntry.amount } returns 75F
         every { newEntry.type } returns EntryType.EXPENSE
 
         store.create(newEntry)
 
         var balance = service.balance(store.all())
-        assertEquals(-75, balance)
+        assertEquals(-75F, balance)
     }
 }

@@ -14,13 +14,13 @@ internal class EntryModelTest {
     final val EXPECTED_ID: String = id
     final val EXPECTED_VENDOR: String = "Tesco"
     final val EXPECTED_DESCRIPTION: String = "Dinner"
-    final val EXPECTED_AMOUNT: Int = 10
+    final val EXPECTED_AMOUNT: Float = 10F
     final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
 
     @BeforeEach
     internal fun setup() {
         expense = EntryModel(
-            10,
+            10F,
             EntryType.EXPENSE,
             "Tesco",
             "Dinner",
@@ -47,7 +47,7 @@ internal class EntryModelTest {
 
     @Test
     fun setAmount() {
-        var newAmount: Int = 15
+        var newAmount: Float = 15F
         expense.amount = newAmount
         assertEquals(newAmount, expense.amount)
     }

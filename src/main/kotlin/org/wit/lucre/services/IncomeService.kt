@@ -5,7 +5,7 @@ import org.wit.lucre.models.EntryType
 
 class IncomeService() {
 
-    fun balance(entries: List<EntryModel>): Int {
+    fun balance(entries: List<EntryModel>): Float {
 
         val values = entries.map{
             if (it.type.equals(EntryType.INCOME))
