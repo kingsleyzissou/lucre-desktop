@@ -1,13 +1,12 @@
 package org.wit.lucre.models
 
-import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 internal class CategoryModelTest {
 
-    lateinit var category: CategoryModel;
+    lateinit var category: CategoryModel
 
     final val EXPECTED_NAME = "Takeout"
     final val EXPECTED_DESCRIPTION = "Dine-in and takeaways"

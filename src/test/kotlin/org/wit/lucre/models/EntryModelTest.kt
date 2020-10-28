@@ -1,23 +1,21 @@
 package org.wit.lucre.models
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
-import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 internal class EntryModelTest {
 
-    lateinit var expense: EntryModel;
+    lateinit var expense: EntryModel
 
-    val id: String = NanoIdUtils.randomNanoId();
+    val id: String = NanoIdUtils.randomNanoId()
 
-    final val EXPECTED_ID: String = id;
-    final val EXPECTED_VENDOR: String = "Tesco";
-    final val EXPECTED_DESCRIPTION: String = "Dinner";
-    final val EXPECTED_AMOUNT: Int = 10;
-    final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE;
+    final val EXPECTED_ID: String = id
+    final val EXPECTED_VENDOR: String = "Tesco"
+    final val EXPECTED_DESCRIPTION: String = "Dinner"
+    final val EXPECTED_AMOUNT: Int = 10
+    final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
 
     @BeforeEach
     internal fun setup() {
