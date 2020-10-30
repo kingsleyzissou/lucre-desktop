@@ -1,6 +1,8 @@
-package org.wit.lucre.models
+package org.wit.lucre.repositories
 
-interface EntryStoreInterface {
+import org.wit.lucre.models.EntryModel
+
+interface CRUDRepositoryInterface {
     fun all(): List<EntryModel>
     fun find(id: String): EntryModel?
     fun create(entry: EntryModel)

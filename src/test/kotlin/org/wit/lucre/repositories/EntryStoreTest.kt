@@ -1,4 +1,4 @@
-package org.wit.lucre.models
+package org.wit.lucre.repositories
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import io.mockk.every
@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.wit.lucre.models.EntryModel
 
-internal class EntryMemoryStoreTest {
+internal class EntryStoreTest {
 
     private val id1: String = NanoIdUtils.randomNanoId()
     private val id2: String = NanoIdUtils.randomNanoId()
@@ -18,7 +19,7 @@ internal class EntryMemoryStoreTest {
     private val entry2 = mockk<EntryModel>()
     private val entry3 = mockk<EntryModel>()
 
-    private lateinit var store: EntryMemoryStore
+    private lateinit var store: EntryStore
 
     @BeforeEach
     fun setup() {
@@ -26,7 +27,7 @@ internal class EntryMemoryStoreTest {
         every { entry2.id } returns id2
         every { entry3.id } returns id3
 
-        store = EntryMemoryStore()
+        store = EntryStore()
         store.create(entry1)
         store.create(entry2)
         store.create(entry3)

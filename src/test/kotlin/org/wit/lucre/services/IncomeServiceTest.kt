@@ -6,7 +6,7 @@ import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.wit.lucre.models.EntryMemoryStore
+import org.wit.lucre.repositories.EntryStore
 import org.wit.lucre.models.EntryModel
 import org.wit.lucre.models.EntryType
 
@@ -17,7 +17,7 @@ internal class IncomeServiceTest {
     private val entry3 = mockk<EntryModel>()
     private val service: IncomeService = IncomeService()
 
-    private lateinit var store: EntryMemoryStore
+    private lateinit var store: EntryStore
 
     @BeforeEach
     fun setup() {
@@ -33,7 +33,7 @@ internal class IncomeServiceTest {
         every { entry3.amount } returns 15F
         every { entry3.type } returns EntryType.INCOME
 
-        store = EntryMemoryStore()
+        store = EntryStore()
         store.create(entry1)
         store.create(entry2)
         store.create(entry3)
