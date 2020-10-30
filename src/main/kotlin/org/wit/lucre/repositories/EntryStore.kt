@@ -2,7 +2,7 @@ package org.wit.lucre.repositories
 
 import org.wit.lucre.models.EntryModel
 
-class EntryStore : CRUDRepositoryInterface {
+class EntryStore : CRUDRepositoryInterface<EntryModel> {
 
     private val entries = HashMap<String, EntryModel>()
 
@@ -23,8 +23,6 @@ class EntryStore : CRUDRepositoryInterface {
     }
 
     override fun addAll(entries: List<EntryModel>) {
-        for (entry in entries) {
-            this.create(entry)
-        }
+        entries.forEach{ e -> this.create(e) }
     }
 }
