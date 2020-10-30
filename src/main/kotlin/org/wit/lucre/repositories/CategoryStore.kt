@@ -2,7 +2,7 @@ package org.wit.lucre.repositories
 
 import org.wit.lucre.models.CategoryModel
 
-class CategoryStore: CRUDRepositoryInterface<CategoryModel> {
+class CategoryStore : CRUDRepositoryInterface<CategoryModel> {
 
     private val categories = HashMap<String, CategoryModel>()
 
@@ -23,6 +23,6 @@ class CategoryStore: CRUDRepositoryInterface<CategoryModel> {
     }
 
     override fun addAll(categories: List<CategoryModel>) {
-        categories.forEach{ c -> this.create(c) }
+        categories.forEach { c -> this.create(c) }
     }
 }

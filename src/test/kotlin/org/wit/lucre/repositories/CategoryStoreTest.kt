@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.wit.lucre.models.CategoryModel
-import org.wit.lucre.models.EntryModel
 
 internal class CategoryStoreTest {
 

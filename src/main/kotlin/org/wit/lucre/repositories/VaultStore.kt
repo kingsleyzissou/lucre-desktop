@@ -2,7 +2,7 @@ package org.wit.lucre.repositories
 
 import org.wit.lucre.models.VaultModel
 
-class VaultStore: CRUDRepositoryInterface<VaultModel> {
+class VaultStore : CRUDRepositoryInterface<VaultModel> {
 
     private val vaults = HashMap<String, VaultModel>()
 
@@ -23,6 +23,6 @@ class VaultStore: CRUDRepositoryInterface<VaultModel> {
     }
 
     override fun addAll(vaults: List<VaultModel>) {
-        vaults.forEach{ v -> this.create(v) }
+        vaults.forEach { v -> this.create(v) }
     }
 }

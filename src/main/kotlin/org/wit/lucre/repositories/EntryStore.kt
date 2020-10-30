@@ -23,6 +23,6 @@ class EntryStore : CRUDRepositoryInterface<EntryModel> {
     }
 
     override fun addAll(entries: List<EntryModel>) {
-        entries.forEach{ e -> this.create(e) }
+        entries.forEach { e -> this.create(e) }
     }
 }
