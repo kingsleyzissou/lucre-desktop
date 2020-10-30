@@ -55,7 +55,7 @@ internal class CategoryStoreTest {
     fun update() {
         val category5 = mockk<CategoryModel>()
         every { category5.id } returns id3
-        every { category5.name } returns "AIB"
+        every { category5.name } returns "Income"
         store.update(category5)
         assertEquals(category5, store.find(id3))
     }
