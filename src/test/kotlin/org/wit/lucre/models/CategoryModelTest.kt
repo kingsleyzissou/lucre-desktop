@@ -8,9 +8,9 @@ internal class CategoryModelTest {
 
     lateinit var category: CategoryModel
 
-    final val EXPECTED_NAME = "Takeout"
-    final val EXPECTED_DESCRIPTION = "Dine-in and takeaways"
-    final val EXPECTED_COlOR = "#ff0000"
+    private final val EXPECTED_NAME = "Takeout"
+    private final val EXPECTED_DESCRIPTION = "Dine-in and takeaways"
+    private final val EXPECTED_COlOR = "#ff0000"
 
     @BeforeEach
     internal fun setup() {
@@ -28,7 +28,7 @@ internal class CategoryModelTest {
 
     @Test
     fun setName() {
-        var newName = "Bills"
+        val newName = "Bills"
         category.name = newName
         assertEquals(newName, category.name)
     }
@@ -40,7 +40,7 @@ internal class CategoryModelTest {
 
     @Test
     fun setDescription() {
-        var newDescription = "Utilities and lights"
+        val newDescription = "Utilities and lights"
         category.description = newDescription
         assertEquals(newDescription, category.description)
     }
@@ -52,7 +52,7 @@ internal class CategoryModelTest {
 
     @Test
     fun setColor() {
-        var newColor = "#00ff00"
+        val newColor = "#00ff00"
         category.color = newColor
         assertEquals(newColor, category.color)
     }
