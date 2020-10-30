@@ -28,9 +28,7 @@ internal class EntryStoreTest {
         every { entry3.id } returns id3
 
         store = EntryStore()
-        store.create(entry1)
-        store.create(entry2)
-        store.create(entry3)
+        store.addAll(listOf(entry1, entry2, entry3))
     }
 
     @Test

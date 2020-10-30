@@ -7,4 +7,5 @@ interface CRUDRepositoryInterface {
     fun find(id: String): EntryModel?
     fun create(entry: EntryModel)
     fun update(entry: EntryModel)
+    fun addAll(entries: List<EntryModel>)
 }

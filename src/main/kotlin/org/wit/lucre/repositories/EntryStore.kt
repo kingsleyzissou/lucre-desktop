@@ -21,4 +21,10 @@ class EntryStore : CRUDRepositoryInterface {
     override fun update(entry: EntryModel) {
         entries[entry.id] = entry
     }
+
+    override fun addAll(entries: List<EntryModel>) {
+        for (entry in entries) {
+            this.create(entry)
+        }
+    }
 }
