@@ -1,6 +1,8 @@
-package org.wit.lucre.models
+package org.wit.lucre.repositories
 
-class EntryMemoryStore : EntryStoreInterface {
+import org.wit.lucre.models.EntryModel
+
+class EntryStore : CRUDRepositoryInterface<EntryModel> {
 
     private val entries = HashMap<String, EntryModel>()
 
@@ -18,5 +20,9 @@ class EntryMemoryStore : EntryStoreInterface {
 
     override fun update(entry: EntryModel) {
         entries[entry.id] = entry
+    }
+
+    override fun addAll(entries: List<EntryModel>) {
+        entries.forEach { e -> this.create(e) }
     }
 }
