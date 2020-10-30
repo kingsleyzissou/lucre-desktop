@@ -2,8 +2,8 @@ package org.wit.lucre.models
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 internal class VaultModelTest {
 
