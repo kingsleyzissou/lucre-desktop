@@ -4,18 +4,27 @@ import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 
 internal class EntryModelTest {
 
     lateinit var expense: EntryModel
 
-    val id: String = NanoIdUtils.randomNanoId()
+    private val id: String = NanoIdUtils.randomNanoId()
+    private val dateTime: LocalDateTime = LocalDateTime.now()
+    private val category: CategoryModel = CategoryModel(
+        "Takeout",
+        "Dine-in and takeaways",
+        "#ff0000"
+    )
 
-    final val EXPECTED_ID: String = id
-    final val EXPECTED_VENDOR: String = "Tesco"
-    final val EXPECTED_DESCRIPTION: String = "Dinner"
-    final val EXPECTED_AMOUNT: Float = 10F
-    final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
+    private final val EXPECTED_ID: String = id
+    private final val EXPECTED_VENDOR: String = "Tesco"
+    private final val EXPECTED_DESCRIPTION: String = "Dinner"
+    private final val EXPECTED_AMOUNT: Float = 10F
+    private final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
+    private final val EXPECTED_DATE: LocalDateTime = dateTime
+    private final val EXPECTED_CATEGORY: CategoryModel = category
 
     @BeforeEach
     internal fun setup() {
@@ -24,7 +33,9 @@ internal class EntryModelTest {
             EntryType.EXPENSE,
             "Tesco",
             "Dinner",
-            id
+            category,
+            id,
+            dateTime
         )
     }
 
@@ -35,7 +46,7 @@ internal class EntryModelTest {
 
     @Test
     fun setId() {
-        var newId: String = NanoIdUtils.randomNanoId()
+        val newId: String = NanoIdUtils.randomNanoId()
         expense.id = newId
         assertEquals(newId, expense.id)
     }
@@ -47,7 +58,7 @@ internal class EntryModelTest {
 
     @Test
     fun setAmount() {
-        var newAmount: Float = 15F
+        val newAmount = 15F
         expense.amount = newAmount
         assertEquals(newAmount, expense.amount)
     }
@@ -59,7 +70,7 @@ internal class EntryModelTest {
 
     @Test
     fun setType() {
-        var newType = EntryType.INCOME
+        val newType = EntryType.INCOME
         expense.type = newType
         assertEquals(newType, expense.type)
     }
@@ -71,7 +82,7 @@ internal class EntryModelTest {
 
     @Test
     fun setVendor() {
-        var newVendor: String = "Spar"
+        val newVendor = "Spar"
         expense.vendor = newVendor
         assertEquals(newVendor, expense.vendor)
     }
@@ -83,8 +94,36 @@ internal class EntryModelTest {
 
     @Test
     fun setDescription() {
-        var newDescription: String = "Refund"
+        val newDescription = "Refund"
         expense.description = newDescription
         assertEquals(newDescription, expense.description)
+    }
+
+    @Test
+    fun getCategory() {
+        assertEquals(EXPECTED_CATEGORY, expense.category)
+    }
+
+    @Test
+    fun setCategory() {
+        val newCategory = CategoryModel(
+            "Bills",
+            "Household bills",
+            "#fff"
+        )
+        expense.category = newCategory
+        assertEquals(newCategory, expense.category)
+    }
+
+    @Test
+    fun getDate() {
+        assertEquals(EXPECTED_DATE, expense.date)
+    }
+
+    @Test
+    fun setDate() {
+        val newDate: LocalDateTime = LocalDateTime.now()
+        expense.date = newDate
+        assertEquals(newDate, expense.date)
     }
 }
