@@ -1,7 +1,11 @@
 package org.wit.lucre.views
 
 import javafx.scene.paint.Color
-import tornadofx.*
+import tornadofx.View
+import tornadofx.borderpane
+import tornadofx.label
+import tornadofx.style
+import tornadofx.useMaxWidth
 
 class HelloWorldView : View("Hello there") {
     override val root = borderpane {
