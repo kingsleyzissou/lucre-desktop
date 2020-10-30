@@ -12,6 +12,11 @@ internal class EntryModelTest {
 
     private val id: String = NanoIdUtils.randomNanoId()
     private val dateTime: LocalDateTime = LocalDateTime.now()
+    private val vault: VaultModel = VaultModel(
+        "HSBC",
+        "GBP Account",
+        '£'
+    )
     private val category: CategoryModel = CategoryModel(
         "Takeout",
         "Dine-in and takeaways",
@@ -25,6 +30,7 @@ internal class EntryModelTest {
     private final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
     private final val EXPECTED_DATE: LocalDateTime = dateTime
     private final val EXPECTED_CATEGORY: CategoryModel = category
+    private final val EXPECTED_VAULT: VaultModel = vault
 
     @BeforeEach
     internal fun setup() {
@@ -34,6 +40,7 @@ internal class EntryModelTest {
             "Tesco",
             "Dinner",
             category,
+            vault,
             id,
             dateTime
         )
@@ -113,6 +120,22 @@ internal class EntryModelTest {
         )
         expense.category = newCategory
         assertEquals(newCategory, expense.category)
+    }
+
+    @Test
+    fun getVault() {
+        assertEquals(EXPECTED_VAULT, expense.vault)
+    }
+
+    @Test
+    fun setVault() {
+        val newVault = VaultModel(
+            "AIB",
+            "Euro account",
+            '€'
+        )
+        expense.vault = newVault
+        assertEquals(newVault, expense.vault)
     }
 
     @Test
