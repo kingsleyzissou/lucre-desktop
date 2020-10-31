@@ -14,14 +14,14 @@ internal class VaultModelTest {
     private final val EXPECTED_ID: String = id
     private final val EXPECTED_NAME: String = "HSBC"
     private final val EXPECTED_DESCRIPTION: String = "GBP Account"
-    private final val EXPECTED_CURRENCY: Char = '£'
+    private final val EXPECTED_CURRENCY: String = "£"
 
     @BeforeEach
     internal fun setup() {
         vault = VaultModel(
             "HSBC",
             "GBP Account",
-            '£',
+            "£",
             id
         )
     }
@@ -57,7 +57,7 @@ internal class VaultModelTest {
 
     @Test
     fun setCurrency() {
-        val newCurrency = '€'
+        val newCurrency = "€"
         vault.currency = newCurrency
         assertEquals(newCurrency, vault.currency)
     }
