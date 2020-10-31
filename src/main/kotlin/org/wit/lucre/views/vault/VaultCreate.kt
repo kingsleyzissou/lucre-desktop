@@ -26,13 +26,13 @@ class VaultCreate : Fragment("Create Vault") {
         form {
             fieldset {
                 field("Vault name:") {
-                    textfield(name).required()
+                    textfield(model.name).required()
                 }
                 field("Description:") {
-                    textfield(description)
+                    textfield(model.description)
                 }
                 field("Currency:") {
-                    combobox<String>(currency, currencies).required()
+                    combobox<String>(model.currency, currencies).required()
                     useMaxSize = true
                 }
                 field {
