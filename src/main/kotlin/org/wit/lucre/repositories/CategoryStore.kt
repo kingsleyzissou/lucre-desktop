@@ -14,15 +14,15 @@ class CategoryStore : CRUDRepositoryInterface<CategoryModel> {
         return categories[id]
     }
 
-    override fun create(category: CategoryModel) {
-        categories[category.id] = category
+    override fun create(value: CategoryModel) {
+        categories[value.id] = value
     }
 
-    override fun update(category: CategoryModel) {
-        categories[category.id] = category
+    override fun update(value: CategoryModel) {
+        categories[value.id] = value
     }
 
-    override fun addAll(categories: List<CategoryModel>) {
-        categories.forEach { c -> this.create(c) }
+    override fun addAll(values: List<CategoryModel>) {
+        values.forEach { c -> this.create(c) }
     }
 }

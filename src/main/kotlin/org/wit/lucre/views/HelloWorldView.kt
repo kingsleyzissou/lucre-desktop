@@ -1,15 +1,16 @@
 package org.wit.lucre.views
 
-import tornadofx.*
+import tornadofx.View
+import tornadofx.datagrid
 
 class HelloWorldView() : View("Hello there") {
-//    override val root = vbox {
-//        button("Press me")
-//        label("Waiting")
-//    }
-    val data = listOf<String>("One", "Two", "Three")
+    private val data = listOf<String>("One", "Two", "Three")
 
     override val root = datagrid(data) {
-//        label(it)
+        onUserSelect(2) {
+            a ->
+            println(a)
+            println("Some other stuff")
+        }
     }
 }
