@@ -14,15 +14,15 @@ class VaultStore : CRUDRepositoryInterface<VaultModel> {
         return vaults[id]
     }
 
-    override fun create(vault: VaultModel) {
-        vaults[vault.id] = vault
+    override fun create(value: VaultModel) {
+        vaults[value.id] = value
     }
 
-    override fun update(vault: VaultModel) {
-        vaults[vault.id] = vault
+    override fun update(value: VaultModel) {
+        vaults[value.id] = value
     }
 
-    override fun addAll(vaults: List<VaultModel>) {
-        vaults.forEach { v -> this.create(v) }
+    override fun addAll(values: List<VaultModel>) {
+        values.forEach { v -> this.create(v) }
     }
 }

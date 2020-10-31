@@ -14,15 +14,15 @@ class EntryStore : CRUDRepositoryInterface<EntryModel> {
         return entries[id]
     }
 
-    override fun create(entry: EntryModel) {
-        entries[entry.id] = entry
+    override fun create(value: EntryModel) {
+        entries[value.id] = value
     }
 
-    override fun update(entry: EntryModel) {
-        entries[entry.id] = entry
+    override fun update(value: EntryModel) {
+        entries[value.id] = value
     }
 
-    override fun addAll(entries: List<EntryModel>) {
-        entries.forEach { e -> this.create(e) }
+    override fun addAll(values: List<EntryModel>) {
+        values.forEach { e -> this.create(e) }
     }
 }
