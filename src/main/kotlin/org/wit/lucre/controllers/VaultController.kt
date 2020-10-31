@@ -1,13 +1,16 @@
 package org.wit.lucre.controllers
 
 import mu.KotlinLogging
+import org.wit.lucre.models.EntryModel
 import org.wit.lucre.models.VaultModel
+import org.wit.lucre.repositories.EntryStore
 import org.wit.lucre.repositories.VaultStore
 import tornadofx.Controller
 
 class VaultController : Controller() {
 
     val vaults = VaultStore()
+    val entries = EntryStore()
     val logger = KotlinLogging.logger {}
 
     init {
@@ -36,5 +39,9 @@ class VaultController : Controller() {
 
     fun index(): List<VaultModel> {
         return vaults.all()
+    }
+
+    fun show(id: String): List<EntryModel> {
+        return entries.all()
     }
 }
