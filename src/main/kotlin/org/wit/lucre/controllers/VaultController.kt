@@ -2,7 +2,7 @@ package org.wit.lucre.controllers
 
 import mu.KotlinLogging
 import org.wit.lucre.models.EntryModel
-import org.wit.lucre.models.VaultModel
+import org.wit.lucre.models.Vault
 import org.wit.lucre.repositories.EntryStore
 import org.wit.lucre.repositories.VaultStore
 import tornadofx.Controller
@@ -18,17 +18,17 @@ class VaultController : Controller() {
 
         vaults.addAll(
             listOf(
-                VaultModel(
+                Vault(
                     "AIB",
                     "Euro",
                     "€"
                 ),
-                VaultModel(
+                Vault(
                     "HSBC",
                     "Pound",
                     "£"
                 ),
-                VaultModel(
+                Vault(
                     "FNB",
                     "Rand",
                     "R"
@@ -37,11 +37,19 @@ class VaultController : Controller() {
         )
     }
 
-    fun index(): List<VaultModel> {
+    fun index(): List<Vault> {
         return vaults.all()
     }
 
     fun show(): List<EntryModel> {
         return entries.all()
+    }
+
+    fun create(name: String, currency: String, description: String = "") {
+        vaults.create(Vault(
+            name,
+            description,
+            currency
+        ))
     }
 }
