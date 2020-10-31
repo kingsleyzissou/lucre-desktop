@@ -52,4 +52,8 @@ class VaultController : Controller() {
             currency
         ))
     }
+
+    fun update() {
+        TODO("Add persistence first, since ids keep changing")
+    }
 }

@@ -20,7 +20,6 @@ class VaultEdit : Fragment("Edit Vault") {
 
     override val root = vbox {
         form {
-            println(model.name.value)
             fieldset {
                 field("Vault name:") {
                     textfield(model.name).required()
@@ -37,7 +36,7 @@ class VaultEdit : Fragment("Edit Vault") {
                         model.rollback()
                     }
                     button("Update") {
-                        enableWhen(model.valid)
+                        enableWhen(model.valid and model.dirty)
                         isDefaultButton = true
                         action {
                             model.commit()
@@ -50,6 +49,6 @@ class VaultEdit : Fragment("Edit Vault") {
     }
 
     private fun update() {
-
+        TODO("Implement after persistence")
     }
 }
