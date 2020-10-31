@@ -41,8 +41,7 @@ class VaultController : Controller() {
         return vaults.all()
     }
 
-    fun show(id: String): List<EntryModel> {
+    fun show(): List<EntryModel> {
         return entries.all()
     }
-
 }
