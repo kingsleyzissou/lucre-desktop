@@ -9,9 +9,9 @@ import tornadofx.Controller
 
 class VaultController : Controller() {
 
-    val vaults = VaultStore()
-    val entries = EntryStore()
-    val logger = KotlinLogging.logger {}
+    private val vaults = VaultStore()
+    private val entries = EntryStore()
+    private val logger = KotlinLogging.logger {}
 
     init {
         logger.info { "Vault controller loading " }
@@ -21,17 +21,17 @@ class VaultController : Controller() {
                 VaultModel(
                     "AIB",
                     "Euro",
-                    '€'
+                    "€"
                 ),
                 VaultModel(
                     "HSBC",
                     "Pound",
-                    '£'
+                    "£"
                 ),
                 VaultModel(
                     "FNB",
                     "Rand",
-                    'R'
+                    "R"
                 )
             )
         )
@@ -44,4 +44,5 @@ class VaultController : Controller() {
     fun show(id: String): List<EntryModel> {
         return entries.all()
     }
+
 }
