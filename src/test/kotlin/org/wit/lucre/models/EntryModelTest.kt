@@ -15,7 +15,7 @@ internal class EntryModelTest {
     private val vault: VaultModel = VaultModel(
         "HSBC",
         "GBP Account",
-        '£'
+        "£"
     )
     private val category: CategoryModel = CategoryModel(
         "Takeout",
@@ -132,7 +132,7 @@ internal class EntryModelTest {
         val newVault = VaultModel(
             "AIB",
             "Euro account",
-            '€'
+            "€"
         )
         expense.vault = newVault
         assertEquals(newVault, expense.vault)
