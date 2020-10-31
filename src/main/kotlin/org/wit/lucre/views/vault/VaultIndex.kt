@@ -2,7 +2,9 @@ package org.wit.lucre.views.vault
 
 import org.wit.lucre.controllers.VaultController
 import org.wit.lucre.models.VaultModel
-import tornadofx.*
+import tornadofx.Fragment
+import tornadofx.datagrid
+import tornadofx.label
 
 class VaultIndex : Fragment("Vault List") {
     val vaultController: VaultController by inject()

@@ -2,7 +2,11 @@ package org.wit.lucre.views.vault
 
 import org.wit.lucre.controllers.VaultController
 import org.wit.lucre.models.VaultModel
-import tornadofx.*
+import tornadofx.Fragment
+import tornadofx.borderpane
+import tornadofx.label
+import tornadofx.observable
+import tornadofx.tableview
 
 class VaultShow : Fragment("Show Vault") {
     val vault: VaultModel by param()
@@ -12,7 +16,6 @@ class VaultShow : Fragment("Show Vault") {
     override val root = borderpane {
         top = label(vault.name)
         center = tableview(data) {
-
         }
     }
 }

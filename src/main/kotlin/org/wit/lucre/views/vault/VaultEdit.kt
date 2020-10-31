@@ -5,6 +5,5 @@ import tornadofx.borderpane
 
 class VaultEdit : Fragment("Edit Vault") {
     override val root = borderpane {
-
     }
 }

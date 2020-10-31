@@ -5,7 +5,6 @@ import tornadofx.item
 import tornadofx.menu
 import tornadofx.menubar
 
-
 class Menu : Fragment("Menu") {
     override val root = menubar() {
         menu("File") {
