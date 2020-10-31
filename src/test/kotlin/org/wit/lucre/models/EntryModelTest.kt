@@ -12,7 +12,7 @@ internal class EntryModelTest {
 
     private val id: String = NanoIdUtils.randomNanoId()
     private val dateTime: LocalDateTime = LocalDateTime.now()
-    private val vault: VaultModel = VaultModel(
+    private val vault: Vault = Vault(
         "HSBC",
         "GBP Account",
         "£"
@@ -30,7 +30,7 @@ internal class EntryModelTest {
     private final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
     private final val EXPECTED_DATE: LocalDateTime = dateTime
     private final val EXPECTED_CATEGORY: CategoryModel = category
-    private final val EXPECTED_VAULT: VaultModel = vault
+    private final val EXPECTED_VAULT: Vault = vault
 
     @BeforeEach
     internal fun setup() {
@@ -129,7 +129,7 @@ internal class EntryModelTest {
 
     @Test
     fun setVault() {
-        val newVault = VaultModel(
+        val newVault = Vault(
             "AIB",
             "Euro account",
             "€"

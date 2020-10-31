@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.wit.lucre.models.VaultModel
+import org.wit.lucre.models.Vault
 
 internal class VaultStoreTest {
 
@@ -15,9 +15,9 @@ internal class VaultStoreTest {
     private val id2: String = NanoIdUtils.randomNanoId()
     private val id3: String = NanoIdUtils.randomNanoId()
 
-    private val vault1 = mockk<VaultModel>()
-    private val vault2 = mockk<VaultModel>()
-    private val vault3 = mockk<VaultModel>()
+    private val vault1 = mockk<Vault>()
+    private val vault2 = mockk<Vault>()
+    private val vault3 = mockk<Vault>()
 
     private lateinit var store: VaultStore
 
@@ -44,7 +44,7 @@ internal class VaultStoreTest {
     @Test
     fun create() {
         val id4 = NanoIdUtils.randomNanoId()
-        val vault4 = mockk<VaultModel>()
+        val vault4 = mockk<Vault>()
         every { vault4.id } returns id4
         store.create(vault4)
         assertTrue(store.all().contains(vault4))
@@ -52,7 +52,7 @@ internal class VaultStoreTest {
 
     @Test
     fun update() {
-        val vault5 = mockk<VaultModel>()
+        val vault5 = mockk<Vault>()
         every { vault5.id } returns id3
         every { vault5.name } returns "AIB"
         store.update(vault5)

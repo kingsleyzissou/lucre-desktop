@@ -9,7 +9,7 @@ data class EntryModel(
     var vendor: String,
     var description: String,
     var category: CategoryModel,
-    var vault: VaultModel,
+    var vault: Vault,
     var id: String = NanoIdUtils.randomNanoId(),
     var date: LocalDateTime = LocalDateTime.now()
 )

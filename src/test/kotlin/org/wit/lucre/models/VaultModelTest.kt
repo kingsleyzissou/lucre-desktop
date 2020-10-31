@@ -9,7 +9,7 @@ internal class VaultModelTest {
 
     private val id: String = NanoIdUtils.randomNanoId()
 
-    private lateinit var vault: VaultModel
+    private lateinit var vault: Vault
 
     private final val EXPECTED_ID: String = id
     private final val EXPECTED_NAME: String = "HSBC"
@@ -18,7 +18,7 @@ internal class VaultModelTest {
 
     @BeforeEach
     internal fun setup() {
-        vault = VaultModel(
+        vault = Vault(
             "HSBC",
             "GBP Account",
             "£",
