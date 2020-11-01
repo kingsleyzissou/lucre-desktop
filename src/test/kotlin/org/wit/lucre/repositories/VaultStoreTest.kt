@@ -3,6 +3,7 @@ package org.wit.lucre.repositories
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.spyk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -15,9 +16,14 @@ internal class VaultStoreTest {
     private val id2: String = NanoIdUtils.randomNanoId()
     private val id3: String = NanoIdUtils.randomNanoId()
 
-    private val vault1 = mockk<Vault>()
-    private val vault2 = mockk<Vault>()
-    private val vault3 = mockk<Vault>()
+    private val vault1 = mockk<Vault>(relaxed = true)
+    private val vault2 = mockk<Vault>(relaxed = true)
+    private val vault3 = Vault(
+        "HSBC",
+        "Pound",
+        "£",
+        id3
+    )
 
     private lateinit var store: VaultStore
 
@@ -25,15 +31,16 @@ internal class VaultStoreTest {
     fun setup() {
         every { vault1.id } returns id1
         every { vault2.id } returns id2
-        every { vault3.id } returns id3
 
-        store = VaultStore()
+        store = spyk<VaultStore>(recordPrivateCalls = true)
+        every { store["serialize"]() } returns println("serialize")
+        every { store["deserialize"]() } returns println("deserialize")
         store.addAll(listOf(vault1, vault2, vault3))
     }
 
     @Test
     fun all() {
-        assertEquals(3, store.all().size)
+        assertEquals(6, store.all().size)
     }
 
     @Test
@@ -55,7 +62,12 @@ internal class VaultStoreTest {
         val vault5 = mockk<Vault>()
         every { vault5.id } returns id3
         every { vault5.name } returns "AIB"
+        every { vault5.description } returns "Euro"
+        every { vault5.currency } returns "€"
         store.update(vault5)
-        assertEquals(vault5, store.find(id3))
+        var old = store.find(id3)
+        assertEquals(vault5.name, old?.name)
+        assertEquals(vault5.description, old?.description)
+        assertEquals(vault5.currency, old?.currency)
     }
 }
