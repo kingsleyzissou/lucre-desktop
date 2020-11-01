@@ -14,7 +14,7 @@ class VaultEdit : Fragment("Edit Vault") {
     private val description = model.bind { SimpleStringProperty() }
     private val currency = model.bind { SimpleStringProperty() }
 
-    private val currencies = listOf<String>(
+    private val currencies = listOf(
         "$", "£", "€", "AED", "R", "R$", "¥"
     )
 
@@ -49,6 +49,12 @@ class VaultEdit : Fragment("Edit Vault") {
     }
 
     private fun update() {
-        TODO("Implement after persistence")
+        vaultController.update(
+            model.item.id,
+            model.name.value,
+            model.currency.value,
+            model.description.value
+        )
+        replaceWith(VaultIndex::class)
     }
 }
