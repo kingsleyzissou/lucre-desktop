@@ -29,7 +29,7 @@ class VaultController : Controller() {
         )
     }
 
-    fun update(id: String ,name: String, currency: String, description: String = "") {
+    fun update(id: String, name: String, currency: String, description: String = "") {
         vaults.update(
             Vault(
                 name,
