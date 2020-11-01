@@ -3,6 +3,8 @@ package org.wit.lucre.utilities
 import mu.KotlinLogging
 import java.io.* // ktlint-disable no-wildcard-imports
 import java.lang.Exception
+import javax.json.Json
+import javax.json.JsonObject
 
 val logger = KotlinLogging.logger {}
 
@@ -17,29 +19,20 @@ fun write(filename: String, data: String) {
     }
 }
 
-fun read(filename: String): String {
-    val file = File(filename)
-    var str = ""
+fun read(filename: String): JsonObject? {
     try {
-        val inputStreamReader = InputStreamReader(FileInputStream(file))
-        if (inputStreamReader != null) {
-            val bufferedReader = BufferedReader(inputStreamReader)
-            val partialStr = StringBuilder()
-            var done = false
-            while (!done) {
-                var line = bufferedReader.readLine()
-                done = (line == null)
-                if (line != null) partialStr.append(line)
-            }
-            inputStreamReader.close()
-            str = partialStr.toString()
-        }
+        // https://stackoverflow.com/a/39786725
+        val inputStream = FileInputStream(filename)
+        val reader = Json.createReader(inputStream)
+        var jsonObject = reader.readObject()
+        reader.close()
+        return jsonObject
     } catch (e: FileNotFoundException) {
-        logger.error { "Cannot find file: $e" }
+        logger.error { "Cannot Find file: $e" }
     } catch (e: IOException) {
         logger.error { "Cannot Read file: $e" }
     }
-    return str
+    return null
 }
 
 fun fileExists(filename: String): Boolean {
