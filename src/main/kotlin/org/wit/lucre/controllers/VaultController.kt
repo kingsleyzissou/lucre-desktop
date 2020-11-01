@@ -1,6 +1,5 @@
 package org.wit.lucre.controllers
 
-import mu.KotlinLogging
 import org.wit.lucre.models.EntryModel
 import org.wit.lucre.models.Vault
 import org.wit.lucre.repositories.EntryStore
@@ -11,31 +10,6 @@ class VaultController : Controller() {
 
     private val vaults = VaultStore()
     private val entries = EntryStore()
-    private val logger = KotlinLogging.logger {}
-
-    init {
-        logger.info { "Vault controller loading " }
-
-        vaults.addAll(
-            listOf(
-                Vault(
-                    "AIB",
-                    "Euro",
-                    "€"
-                ),
-                Vault(
-                    "HSBC",
-                    "Pound",
-                    "£"
-                ),
-                Vault(
-                    "FNB",
-                    "Rand",
-                    "R"
-                )
-            )
-        )
-    }
 
     fun index(): List<Vault> {
         return vaults.all()
