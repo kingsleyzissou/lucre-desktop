@@ -46,11 +46,13 @@ class VaultController : Controller() {
     }
 
     fun create(name: String, currency: String, description: String = "") {
-        vaults.create(Vault(
-            name,
-            description,
-            currency
-        ))
+        vaults.create(
+            Vault(
+                name,
+                description,
+                currency
+            )
+        )
     }
 
     fun update() {
