@@ -29,7 +29,14 @@ class VaultController : Controller() {
         )
     }
 
-    fun update() {
-        TODO("Add persistence first, since ids keep changing")
+    fun update(id: String, name: String, currency: String, description: String = "") {
+        vaults.update(
+            Vault(
+                name,
+                description,
+                currency,
+                id
+            )
+        )
     }
 }
