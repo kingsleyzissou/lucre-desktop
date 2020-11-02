@@ -12,7 +12,7 @@ class Category(
     description: String,
     color: String,
     override var id: String = NanoIdUtils.randomNanoId()
-): Model() {
+) : Model() {
     fun nameProperty() = getProperty(Category::name)
     fun descProperty() = getProperty(Category::description)
     fun colorProperty() = getProperty(Category::color)
