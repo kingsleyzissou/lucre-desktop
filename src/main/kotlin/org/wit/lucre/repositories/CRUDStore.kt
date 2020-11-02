@@ -4,10 +4,9 @@ import mu.KotlinLogging
 import org.wit.lucre.models.Model
 import org.wit.lucre.utilities.fileExists
 import org.wit.lucre.utilities.write
-import tornadofx.jsonArray
 import javax.json.Json
 
-abstract class CRUDStore<T : Model>(var filename: String) : CRUDRepositoryInterface<T> {
+abstract class CRUDStore<T : Model>(var filename: String) : CRUDStoreInterface<T> {
 
     private val logger = KotlinLogging.logger {}
     var list: HashMap<String, T> = HashMap()
@@ -29,6 +28,14 @@ abstract class CRUDStore<T : Model>(var filename: String) : CRUDRepositoryInterf
     override fun create(value: T) {
         list[value.id] = value
         serialize()
+    }
+
+    override fun update(value: T) {
+        val model = find(value.id)
+        if (model != null) {
+            list[value.id] = value
+            serialize()
+        }
     }
 
     override fun addAll(values: List<T>) {

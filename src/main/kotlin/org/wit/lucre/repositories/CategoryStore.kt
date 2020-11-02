@@ -1,28 +1,16 @@
 package org.wit.lucre.repositories
 
-import org.wit.lucre.models.CategoryModel
+import org.wit.lucre.models.Category
+import org.wit.lucre.utilities.read
+import tornadofx.jsonArray
+import tornadofx.toModel
+import javax.json.JsonObject
 
-class CategoryStore : CRUDRepositoryInterface<CategoryModel> {
+class CategoryStore : CRUDStore<Category>("categories.json") {
 
-    private val categories = HashMap<String, CategoryModel>()
-
-    override fun all(): List<CategoryModel> {
-        return categories.values.toList()
-    }
-
-    override fun find(id: String): CategoryModel? {
-        return categories[id]
-    }
-
-    override fun create(value: CategoryModel) {
-        categories[value.id] = value
-    }
-
-    override fun update(value: CategoryModel) {
-        categories[value.id] = value
-    }
-
-    override fun addAll(values: List<CategoryModel>) {
-        values.forEach { c -> this.create(c) }
+    override fun deserialize() {
+        var contents: JsonObject = read(filename)!!
+        var arr = contents.jsonArray("list")?.toModel<Category>()
+        arr?.forEach { list[it.id] = it }
     }
 }

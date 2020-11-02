@@ -17,7 +17,7 @@ internal class EntryModelTest {
         "GBP Account",
         "£"
     )
-    private val category: CategoryModel = CategoryModel(
+    private val category: Category = Category(
         "Takeout",
         "Dine-in and takeaways",
         "#ff0000"
@@ -113,7 +113,7 @@ internal class EntryModelTest {
 
     @Test
     fun setCategory() {
-        val newCategory = CategoryModel(
+        val newCategory = Category(
             "Bills",
             "Household bills",
             "#fff"
