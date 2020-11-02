@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 internal class CategoryModelTest {
 
-    lateinit var category: CategoryModel
+    lateinit var category: Category
 
     private final val EXPECTED_NAME = "Takeout"
     private final val EXPECTED_DESCRIPTION = "Dine-in and takeaways"
@@ -14,7 +14,7 @@ internal class CategoryModelTest {
 
     @BeforeEach
     internal fun setup() {
-        category = CategoryModel(
+        category = Category(
             "Takeout",
             "Dine-in and takeaways",
             "#ff0000"

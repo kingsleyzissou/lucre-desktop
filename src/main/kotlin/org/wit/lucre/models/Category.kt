@@ -2,7 +2,7 @@ package org.wit.lucre.models
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 
-class CategoryModel(
+class Category(
     var name: String,
     var description: String,
     var color: String,
