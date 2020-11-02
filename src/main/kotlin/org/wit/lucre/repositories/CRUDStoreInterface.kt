@@ -1,6 +1,6 @@
 package org.wit.lucre.repositories
 
-interface CRUDRepositoryInterface<T> {
+interface CRUDStoreInterface<T> {
     fun all(): List<T>
     fun find(id: String): T?
     fun create(value: T)
