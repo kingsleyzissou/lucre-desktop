@@ -8,10 +8,6 @@ import javax.json.JsonObject
 
 class CategoryStore : CRUDStore<Category>("categories.json") {
 
-    override fun update(value: Category) {
-        list[value.id] = value
-    }
-
     override fun deserialize() {
         var contents: JsonObject = read(filename)!!
         var arr = contents.jsonArray("list")?.toModel<Category>()
