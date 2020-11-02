@@ -3,6 +3,7 @@ package org.wit.lucre.services
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.spyk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -33,7 +34,9 @@ internal class IncomeServiceTest {
         every { entry3.amount } returns 15F
         every { entry3.type } returns EntryType.INCOME
 
-        store = EntryStore()
+        store = spyk(recordPrivateCalls = true)
+        every { store["serialize"]() } returns println("serialize")
+        every { store["deserialize"]() } returns println("deserialize")
         store.create(entry1)
         store.create(entry2)
         store.create(entry3)

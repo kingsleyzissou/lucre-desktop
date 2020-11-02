@@ -41,8 +41,8 @@ internal class EntryModelTest {
             "Dinner",
             category.id,
             vault.id,
-            dateTime,
-            id
+            id,
+            dateTime
         )
     }
 
