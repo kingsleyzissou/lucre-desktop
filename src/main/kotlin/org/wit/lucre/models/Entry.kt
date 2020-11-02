@@ -33,8 +33,8 @@ class Entry(
 
     override fun updateModel(json: JsonObject) {
         with(json) {
-            amount = float("amount")!!
-            type = enumValueOf<EntryType>("type")
+            amount = string("amount").toString().toFloat()
+            type = EntryType.valueOf(string("type").toString())
             vendor = string("vendor").toString()
             description = string("description").toString()
             category = string("category").toString()
@@ -45,7 +45,7 @@ class Entry(
 
     override fun toJSON(json: JsonBuilder) {
         with(json) {
-            add("amount", amount)
+            add("amount", amount.toString())
             add("type", type.toString())
             add("vendor", vendor)
             add("description", description)
