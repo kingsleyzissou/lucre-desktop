@@ -3,7 +3,7 @@ package org.wit.lucre.models
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import java.time.LocalDateTime
 
-data class EntryModel(
+data class Entry(
     var amount: Float,
     var type: Enum<EntryType>,
     var vendor: String,

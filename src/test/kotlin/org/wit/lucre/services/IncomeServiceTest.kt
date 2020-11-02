@@ -6,15 +6,15 @@ import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.wit.lucre.models.EntryModel
+import org.wit.lucre.models.Entry
 import org.wit.lucre.models.EntryType
 import org.wit.lucre.repositories.EntryStore
 
 internal class IncomeServiceTest {
 
-    private val entry1 = mockk<EntryModel>()
-    private val entry2 = mockk<EntryModel>()
-    private val entry3 = mockk<EntryModel>()
+    private val entry1 = mockk<Entry>()
+    private val entry2 = mockk<Entry>()
+    private val entry3 = mockk<Entry>()
     private val service: IncomeService = IncomeService()
 
     private lateinit var store: EntryStore
@@ -47,7 +47,7 @@ internal class IncomeServiceTest {
 
     @Test
     fun add() {
-        val newEntry = mockk<EntryModel>()
+        val newEntry = mockk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 100F
         every { newEntry.type } returns EntryType.INCOME
@@ -60,7 +60,7 @@ internal class IncomeServiceTest {
 
     @Test
     fun spend() {
-        val newEntry = mockk<EntryModel>()
+        val newEntry = mockk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 75F
         every { newEntry.type } returns EntryType.EXPENSE

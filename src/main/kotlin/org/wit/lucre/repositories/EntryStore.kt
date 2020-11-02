@@ -1,28 +1,28 @@
 package org.wit.lucre.repositories
 
-import org.wit.lucre.models.EntryModel
+import org.wit.lucre.models.Entry
 
-class EntryStore : CRUDRepositoryInterface<EntryModel> {
+class EntryStore : CRUDRepositoryInterface<Entry> {
 
-    private val entries = HashMap<String, EntryModel>()
+    private val entries = HashMap<String, Entry>()
 
-    override fun all(): List<EntryModel> {
+    override fun all(): List<Entry> {
         return entries.values.toList()
     }
 
-    override fun find(id: String): EntryModel? {
+    override fun find(id: String): Entry? {
         return entries[id]
     }
 
-    override fun create(value: EntryModel) {
+    override fun create(value: Entry) {
         entries[value.id] = value
     }
 
-    override fun update(value: EntryModel) {
+    override fun update(value: Entry) {
         entries[value.id] = value
     }
 
-    override fun addAll(values: List<EntryModel>) {
+    override fun addAll(values: List<Entry>) {
         values.forEach { e -> this.create(e) }
     }
 }

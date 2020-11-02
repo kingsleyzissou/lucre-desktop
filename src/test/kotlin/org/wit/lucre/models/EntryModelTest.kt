@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 internal class EntryModelTest {
 
-    lateinit var expense: EntryModel
+    lateinit var expense: Entry
 
     private val id: String = NanoIdUtils.randomNanoId()
     private val dateTime: LocalDateTime = LocalDateTime.now()
@@ -34,7 +34,7 @@ internal class EntryModelTest {
 
     @BeforeEach
     internal fun setup() {
-        expense = EntryModel(
+        expense = Entry(
             10F,
             EntryType.EXPENSE,
             "Tesco",

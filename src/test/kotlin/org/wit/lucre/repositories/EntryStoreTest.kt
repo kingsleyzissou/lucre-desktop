@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.wit.lucre.models.EntryModel
+import org.wit.lucre.models.Entry
 
 internal class EntryStoreTest {
 
@@ -15,9 +15,9 @@ internal class EntryStoreTest {
     private val id2: String = NanoIdUtils.randomNanoId()
     private val id3: String = NanoIdUtils.randomNanoId()
 
-    private val entry1 = mockk<EntryModel>()
-    private val entry2 = mockk<EntryModel>()
-    private val entry3 = mockk<EntryModel>()
+    private val entry1 = mockk<Entry>()
+    private val entry2 = mockk<Entry>()
+    private val entry3 = mockk<Entry>()
 
     private lateinit var store: EntryStore
 
@@ -44,7 +44,7 @@ internal class EntryStoreTest {
     @Test
     fun create() {
         val id4 = NanoIdUtils.randomNanoId()
-        val entry4 = mockk<EntryModel>()
+        val entry4 = mockk<Entry>()
         every { entry4.id } returns id4
         store.create(entry4)
         assertTrue(store.all().contains(entry4))
@@ -52,7 +52,7 @@ internal class EntryStoreTest {
 
     @Test
     fun update() {
-        val entry5 = mockk<EntryModel>()
+        val entry5 = mockk<Entry>()
         every { entry5.id } returns id3
         every { entry5.vendor } returns "Tesco"
         store.update(entry5)
