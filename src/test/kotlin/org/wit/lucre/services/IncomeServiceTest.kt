@@ -3,18 +3,19 @@ package org.wit.lucre.services
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.spyk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.wit.lucre.models.EntryModel
+import org.wit.lucre.models.Entry
 import org.wit.lucre.models.EntryType
 import org.wit.lucre.repositories.EntryStore
 
 internal class IncomeServiceTest {
 
-    private val entry1 = mockk<EntryModel>()
-    private val entry2 = mockk<EntryModel>()
-    private val entry3 = mockk<EntryModel>()
+    private val entry1 = mockk<Entry>()
+    private val entry2 = mockk<Entry>()
+    private val entry3 = mockk<Entry>()
     private val service: IncomeService = IncomeService()
 
     private lateinit var store: EntryStore
@@ -33,7 +34,9 @@ internal class IncomeServiceTest {
         every { entry3.amount } returns 15F
         every { entry3.type } returns EntryType.INCOME
 
-        store = EntryStore()
+        store = spyk(recordPrivateCalls = true)
+        every { store["serialize"]() } returns println("serialize")
+        every { store["deserialize"]() } returns println("deserialize")
         store.create(entry1)
         store.create(entry2)
         store.create(entry3)
@@ -47,7 +50,7 @@ internal class IncomeServiceTest {
 
     @Test
     fun add() {
-        val newEntry = mockk<EntryModel>()
+        val newEntry = mockk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 100F
         every { newEntry.type } returns EntryType.INCOME
@@ -60,7 +63,7 @@ internal class IncomeServiceTest {
 
     @Test
     fun spend() {
-        val newEntry = mockk<EntryModel>()
+        val newEntry = mockk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 75F
         every { newEntry.type } returns EntryType.EXPENSE

@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 internal class EntryModelTest {
 
-    lateinit var expense: EntryModel
+    lateinit var expense: Entry
 
     private val id: String = NanoIdUtils.randomNanoId()
     private val dateTime: LocalDateTime = LocalDateTime.now()
@@ -29,18 +29,18 @@ internal class EntryModelTest {
     private final val EXPECTED_AMOUNT: Float = 10F
     private final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
     private final val EXPECTED_DATE: LocalDateTime = dateTime
-    private final val EXPECTED_CATEGORY: CategoryModel = category
-    private final val EXPECTED_VAULT: Vault = vault
+    private final val EXPECTED_CATEGORY: String = category.id
+    private final val EXPECTED_VAULT: String = vault.id
 
     @BeforeEach
     internal fun setup() {
-        expense = EntryModel(
+        expense = Entry(
             10F,
             EntryType.EXPENSE,
             "Tesco",
             "Dinner",
-            category,
-            vault,
+            category.id,
+            vault.id,
             id,
             dateTime
         )
@@ -118,8 +118,8 @@ internal class EntryModelTest {
             "Household bills",
             "#fff"
         )
-        expense.category = newCategory
-        assertEquals(newCategory, expense.category)
+        expense.category = newCategory.id
+        assertEquals(newCategory.id, expense.category)
     }
 
     @Test
@@ -134,8 +134,8 @@ internal class EntryModelTest {
             "Euro account",
             "€"
         )
-        expense.vault = newVault
-        assertEquals(newVault, expense.vault)
+        expense.vault = newVault.id
+        assertEquals(newVault.id, expense.vault)
     }
 
     @Test

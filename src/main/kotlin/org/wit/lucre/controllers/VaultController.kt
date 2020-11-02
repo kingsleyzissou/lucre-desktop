@@ -1,6 +1,6 @@
 package org.wit.lucre.controllers
 
-import org.wit.lucre.models.EntryModel
+import org.wit.lucre.models.Entry
 import org.wit.lucre.models.Vault
 import org.wit.lucre.repositories.EntryStore
 import org.wit.lucre.repositories.VaultStore
@@ -15,7 +15,7 @@ class VaultController : Controller() {
         return vaults.all()
     }
 
-    fun show(): List<EntryModel> {
+    fun show(): List<Entry> {
         return entries.all()
     }
 

@@ -3,11 +3,13 @@ package org.wit.lucre.repositories
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.spyk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.wit.lucre.models.EntryModel
+import org.wit.lucre.models.Entry
+import org.wit.lucre.models.EntryType
 
 internal class EntryStoreTest {
 
@@ -15,9 +17,17 @@ internal class EntryStoreTest {
     private val id2: String = NanoIdUtils.randomNanoId()
     private val id3: String = NanoIdUtils.randomNanoId()
 
-    private val entry1 = mockk<EntryModel>()
-    private val entry2 = mockk<EntryModel>()
-    private val entry3 = mockk<EntryModel>()
+    private val entry1 = mockk<Entry>()
+    private val entry2 = mockk<Entry>()
+    private val entry3 = Entry(
+        4F,
+        EntryType.EXPENSE,
+        "Vodafone",
+        "Internet",
+        "Bill",
+        "3",
+        id3
+    )
 
     private lateinit var store: EntryStore
 
@@ -25,9 +35,10 @@ internal class EntryStoreTest {
     fun setup() {
         every { entry1.id } returns id1
         every { entry2.id } returns id2
-        every { entry3.id } returns id3
 
-        store = EntryStore()
+        store = spyk(recordPrivateCalls = true)
+        every { store["serialize"]() } returns println("serialize")
+        every { store["deserialize"]() } returns println("deserialize")
         store.addAll(listOf(entry1, entry2, entry3))
     }
 
@@ -44,7 +55,7 @@ internal class EntryStoreTest {
     @Test
     fun create() {
         val id4 = NanoIdUtils.randomNanoId()
-        val entry4 = mockk<EntryModel>()
+        val entry4 = mockk<Entry>()
         every { entry4.id } returns id4
         store.create(entry4)
         assertTrue(store.all().contains(entry4))
@@ -52,10 +63,22 @@ internal class EntryStoreTest {
 
     @Test
     fun update() {
-        val entry5 = mockk<EntryModel>()
-        every { entry5.id } returns id3
-        every { entry5.vendor } returns "Tesco"
+        val entry5 = Entry(
+            3F,
+            EntryType.EXPENSE,
+            "Tesco",
+            "Groceries",
+            "1",
+            "2",
+            id3
+        )
         store.update(entry5)
-        assertEquals(entry5, store.find(id3))
+        var old = store.find(id3)
+        assertEquals(old?.amount, entry5.amount)
+        assertEquals(old?.type, entry5.type)
+        assertEquals(old?.vendor, entry5.vendor)
+        assertEquals(old?.description, entry5.description)
+        assertEquals(old?.category, entry5.category)
+        assertEquals(old?.vault, entry5.vault)
     }
 }
