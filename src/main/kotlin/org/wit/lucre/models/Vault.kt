@@ -9,8 +9,8 @@ class Vault(
     name: String? = null,
     description: String? = null,
     currency: String? = null,
-    var id: String = NanoIdUtils.randomNanoId()
-) : JsonModel {
+    override var id: String = NanoIdUtils.randomNanoId()
+) : Model() {
     val nameProperty = SimpleStringProperty(this, "name", name)
     val descProperty = SimpleStringProperty(this, "description", description)
     val currencyProperty = SimpleStringProperty(this, "currency", currency)
