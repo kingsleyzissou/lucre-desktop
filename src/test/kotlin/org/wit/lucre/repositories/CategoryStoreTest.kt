@@ -3,6 +3,7 @@ package org.wit.lucre.repositories
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.spyk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -27,7 +28,9 @@ internal class CategoryStoreTest {
         every { category2.id } returns id2
         every { category3.id } returns id3
 
-        store = CategoryStore()
+        store = spyk(recordPrivateCalls = true)
+        every { store["serialize"]() } returns println("serialize")
+        every { store["deserialize"]() } returns println("deserialize")
         store.addAll(listOf(category1, category2, category3))
     }
 
