@@ -28,9 +28,9 @@ internal class CategoryStoreTest {
         every { category2.id } returns id2
         every { category3.id } returns id3
 
-        store = spyk(recordPrivateCalls = true)
-        every { store["serialize"]() } returns println("serialize")
-        every { store["deserialize"]() } returns println("deserialize")
+        store = spyk(CategoryStore("test.json"))
+        every { store["serialize"]() } returns "serialize"
+        every { store["deserialize"]() } returns "deserialize"
         store.addAll(listOf(category1, category2, category3))
     }
 

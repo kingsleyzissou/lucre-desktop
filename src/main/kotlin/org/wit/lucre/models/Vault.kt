@@ -2,7 +2,7 @@ package org.wit.lucre.models
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import javafx.beans.property.SimpleStringProperty
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 import javax.json.JsonObject
 
 class Vault(

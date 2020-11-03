@@ -8,9 +8,9 @@ import tornadofx.string
 import javax.json.JsonObject
 
 class Category(
-    name: String,
-    description: String,
-    color: String,
+    name: String? = null,
+    description: String? = null,
+    color: String? = null,
     override var id: String = NanoIdUtils.randomNanoId()
 ) : Model() {
     fun nameProperty() = getProperty(Category::name)
@@ -37,5 +37,9 @@ class Category(
             add("color", color)
             add("id", id)
         }
+    }
+
+    override fun toString(): String {
+        return name
     }
 }

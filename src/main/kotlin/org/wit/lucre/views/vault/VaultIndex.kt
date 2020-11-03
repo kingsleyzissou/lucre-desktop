@@ -3,7 +3,7 @@ package org.wit.lucre.views.vault
 import org.wit.lucre.controllers.VaultController
 import org.wit.lucre.models.Vault
 import org.wit.lucre.viewmodels.VaultModel
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 
 class VaultIndex : Fragment("Vault List") {
     private val vaultController: VaultController by inject()

@@ -24,7 +24,7 @@ internal class EntryStoreTest {
         EntryType.EXPENSE,
         "Vodafone",
         "Internet",
-        "Bill",
+        mockk(),
         "3",
         id3
     )
@@ -36,9 +36,9 @@ internal class EntryStoreTest {
         every { entry1.id } returns id1
         every { entry2.id } returns id2
 
-        store = spyk(recordPrivateCalls = true)
-        every { store["serialize"]() } returns println("serialize")
-        every { store["deserialize"]() } returns println("deserialize")
+        store = spyk(EntryStore("test.json"))
+        every { store["serialize"]() } returns "serialize"
+        every { store["deserialize"]() } returns "deserialize"
         store.addAll(listOf(entry1, entry2, entry3))
     }
 
@@ -68,7 +68,7 @@ internal class EntryStoreTest {
             EntryType.EXPENSE,
             "Tesco",
             "Groceries",
-            "1",
+            mockk(),
             "2",
             id3
         )

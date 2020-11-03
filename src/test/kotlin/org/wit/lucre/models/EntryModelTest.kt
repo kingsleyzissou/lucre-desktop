@@ -29,7 +29,7 @@ internal class EntryModelTest {
     private final val EXPECTED_AMOUNT: Float = 10F
     private final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
     private final val EXPECTED_DATE: LocalDateTime = dateTime
-    private final val EXPECTED_CATEGORY: String = category.id
+    private final val EXPECTED_CATEGORY: Category = category
     private final val EXPECTED_VAULT: String = vault.id
 
     @BeforeEach
@@ -39,7 +39,7 @@ internal class EntryModelTest {
             EntryType.EXPENSE,
             "Tesco",
             "Dinner",
-            category.id,
+            category,
             vault.id,
             id,
             dateTime
@@ -118,8 +118,8 @@ internal class EntryModelTest {
             "Household bills",
             "#fff"
         )
-        expense.category = newCategory.id
-        assertEquals(newCategory.id, expense.category)
+        expense.category = newCategory
+        assertEquals(newCategory, expense.category)
     }
 
     @Test

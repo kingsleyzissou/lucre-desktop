@@ -1,18 +1,12 @@
 package org.wit.lucre.views.vault
 
-import javafx.beans.property.SimpleStringProperty
 import org.wit.lucre.controllers.VaultController
 import org.wit.lucre.viewmodels.VaultModel
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 
 class VaultEdit : Fragment("Edit Vault") {
-
     private val vaultController: VaultController by inject()
     private val model: VaultModel by inject()
-
-    private val name = model.bind { SimpleStringProperty() }
-    private val description = model.bind { SimpleStringProperty() }
-    private val currency = model.bind { SimpleStringProperty() }
 
     private val currencies = listOf(
         "$", "£", "€", "AED", "R", "R$", "¥"
@@ -49,12 +43,7 @@ class VaultEdit : Fragment("Edit Vault") {
     }
 
     private fun update() {
-        vaultController.update(
-            model.item.id,
-            model.name.value,
-            model.currency.value,
-            model.description.value
-        )
+        vaultController.update(model.item)
         replaceWith(VaultIndex::class)
     }
 }
