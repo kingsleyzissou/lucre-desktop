@@ -1,5 +1,6 @@
 package org.wit.lucre.views.entry
 
+import javafx.beans.property.Property
 import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
@@ -20,12 +21,6 @@ class EntryCreate : Fragment("Create Entry") {
 
     val model: EntryModel = EntryModel(Entry())
 
-    private val vendor = model.bind { SimpleStringProperty() }
-    private val type = model.bind { SimpleObjectProperty<Enum<EntryType>>() }
-    private val description = model.bind { SimpleStringProperty() }
-    private val amount = model.bind { SimpleFloatProperty() }
-    private val category = model.bind { SimpleObjectProperty<Category>() }
-
     private val types = listOf<Enum<EntryType>>(
         EntryType.EXPENSE, EntryType.INCOME
     )
@@ -40,7 +35,7 @@ class EntryCreate : Fragment("Create Entry") {
                     textfield(model.description)
                 }
                 field("Amount:") {
-                    textfield(amount).required()
+                    textfield(model.amount as Property<Number>).required()
                 }
                 field("Expense Type:") {
                     combobox(model.type, types).required()
@@ -70,7 +65,7 @@ class EntryCreate : Fragment("Create Entry") {
 
     private fun create() {
         entryController.create(
-            amount.value.toFloat(),
+            model.amount.value.toFloat(),
             model.type.value,
             model.vendor.value,
             model.category.value,
