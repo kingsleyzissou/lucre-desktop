@@ -21,14 +21,8 @@ class VaultController : Controller() {
         return store.all()
     }
 
-    fun create(name: String, currency: String, description: String = "") {
-        store.create(
-            Vault(
-                name,
-                description,
-                currency
-            )
-        )
+    fun create(vault: Vault) {
+        store.create(vault)
     }
 
     fun update(id: String, name: String, currency: String, description: String = "") {

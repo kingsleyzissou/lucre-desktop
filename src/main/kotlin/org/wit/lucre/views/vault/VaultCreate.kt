@@ -11,10 +11,6 @@ class VaultCreate : Fragment("Create Vault") {
     private val vaultController: VaultController by inject()
     private var model = VaultModel(Vault())
 
-    private val name = model.bind { SimpleStringProperty() }
-    private val description = model.bind { SimpleStringProperty() }
-    private val currency = model.bind { SimpleStringProperty() }
-
     private val currencies = listOf<String>(
         "$", "£", "€", "AED", "R", "R$", "¥"
     )
@@ -51,11 +47,7 @@ class VaultCreate : Fragment("Create Vault") {
     }
 
     private fun create() {
-        vaultController.create(
-            name.value,
-            currency.value,
-            description.value
-        )
+        vaultController.create(model.item)
         replaceWith(VaultIndex::class)
     }
 }
