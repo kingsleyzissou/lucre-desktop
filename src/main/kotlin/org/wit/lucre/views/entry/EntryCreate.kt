@@ -1,25 +1,31 @@
 package org.wit.lucre.views.entry
 
-import javafx.beans.property.Property
 import javafx.beans.property.SimpleFloatProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import org.wit.lucre.controllers.CategoryController
+import org.wit.lucre.controllers.EntryController
+import org.wit.lucre.models.Category
 import org.wit.lucre.models.Entry
 import org.wit.lucre.models.EntryType
 import org.wit.lucre.viewmodels.EntryModel
 import org.wit.lucre.viewmodels.VaultModel
-import tornadofx.*
+import org.wit.lucre.views.vault.VaultIndex
+import org.wit.lucre.views.vault.VaultShow
+import tornadofx.* // ktlint-disable no-wildcard-imports
 
 class EntryCreate : Fragment("Create Entry") {
-    private val parent: VaultModel by inject()
+    private val vault: VaultModel by inject()
+    private val entryController: EntryController by inject()
+    private val categoryController: CategoryController by inject()
+
     val model: EntryModel = EntryModel(Entry())
 
     private val vendor = model.bind { SimpleStringProperty() }
     private val type = model.bind { SimpleObjectProperty<Enum<EntryType>>() }
     private val description = model.bind { SimpleStringProperty() }
     private val amount = model.bind { SimpleFloatProperty() }
-    private val category = model.bind { SimpleStringProperty() }
-    private val vault = model.bind { SimpleStringProperty(parent.item.id) }
+    private val category = model.bind { SimpleObjectProperty<Category>() }
 
     private val types = listOf<Enum<EntryType>>(
         EntryType.EXPENSE, EntryType.INCOME
@@ -29,21 +35,21 @@ class EntryCreate : Fragment("Create Entry") {
         form {
             fieldset {
                 field("Shop:") {
-                    textfield(vendor).required()
+                    textfield(model.vendor).required()
                 }
                 field("Description:") {
-                    textfield(description)
+                    textfield(model.description)
                 }
                 field("Amount:") {
                     textfield(amount).required()
                 }
                 field("Expense Type:") {
-                    combobox(type, types).required()
+                    combobox(model.type, types).required()
                     useMaxSize = true
                 }
                 field("Category:") {
-                    TODO("Add list cateogries")
-                    textfield(category)
+                    combobox(model.category, categoryController.index()).required()
+                    useMaxSize = true
                 }
                 field {
                     button("Clear") {
@@ -64,6 +70,21 @@ class EntryCreate : Fragment("Create Entry") {
     }
 
     private fun create() {
-        println(type)
+        entryController.create(
+            model.amount.value.toFloat(),
+            model.type.value,
+            model.vendor.value,
+            model.category.value,
+            vault.item.id,
+            model.description.value
+        )
+        back()
+    }
+
+    private fun back() {
+        val scope = Scope()
+        setInScope(vault, scope)
+        replaceWith(find<VaultShow>(scope))
     }
 }
+
