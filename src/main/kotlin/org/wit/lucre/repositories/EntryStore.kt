@@ -6,11 +6,11 @@ import tornadofx.jsonArray
 import tornadofx.toModel
 import javax.json.JsonObject
 
-class EntryStore : CRUDStore<Entry>("entries.json") {
+class EntryStore(file: String = "entries.json") : CRUDStore<Entry>(file) {
 
     override fun deserialize() {
-        var contents: JsonObject = read(filename)!!
-        var arr = contents.jsonArray("list")?.toModel<Entry>()
+        val contents: JsonObject = read(filename)!!
+        val arr = contents.jsonArray("list")?.toModel<Entry>()
         arr?.forEach { list[it.id] = it }
     }
 }

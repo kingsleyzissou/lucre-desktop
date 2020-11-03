@@ -32,15 +32,15 @@ internal class VaultStoreTest {
         every { vault1.id } returns id1
         every { vault2.id } returns id2
 
-        store = spyk<VaultStore>(recordPrivateCalls = true)
-        every { store["serialize"]() } returns println("serialize")
-        every { store["deserialize"]() } returns println("deserialize")
+        store = spyk(VaultStore("test.json"))
+        every { store["serialize"]() } returns "serialize"
+        every { store["deserialize"]() } returns "deserialize"
         store.addAll(listOf(vault1, vault2, vault3))
     }
 
     @Test
     fun all() {
-        assertEquals(6, store.all().size)
+        assertEquals(3, store.all().size)
     }
 
     @Test

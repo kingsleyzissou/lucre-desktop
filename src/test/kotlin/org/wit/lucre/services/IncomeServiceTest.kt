@@ -1,9 +1,7 @@
 package org.wit.lucre.services
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.spyk
+import io.mockk.* // ktlint-disable no-wildcard-imports
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -13,9 +11,9 @@ import org.wit.lucre.repositories.EntryStore
 
 internal class IncomeServiceTest {
 
-    private val entry1 = mockk<Entry>()
-    private val entry2 = mockk<Entry>()
-    private val entry3 = mockk<Entry>()
+    private val entry1 = spyk<Entry>()
+    private val entry2 = spyk<Entry>()
+    private val entry3 = spyk<Entry>()
     private val service: IncomeService = IncomeService()
 
     private lateinit var store: EntryStore
@@ -25,21 +23,22 @@ internal class IncomeServiceTest {
         every { entry1.id } returns NanoIdUtils.randomNanoId()
         every { entry1.amount } returns 5F
         every { entry1.type } returns EntryType.EXPENSE
+        every { entry1.getSignedAmount() } returns -5F
 
         every { entry2.id } returns NanoIdUtils.randomNanoId()
         every { entry2.amount } returns 10F
         every { entry2.type } returns EntryType.EXPENSE
+        every { entry2.getSignedAmount() } returns -10F
 
         every { entry3.id } returns NanoIdUtils.randomNanoId()
         every { entry3.amount } returns 15F
         every { entry3.type } returns EntryType.INCOME
+        every { entry3.getSignedAmount() } returns 15F
 
-        store = spyk(recordPrivateCalls = true)
-        every { store["serialize"]() } returns println("serialize")
-        every { store["deserialize"]() } returns println("deserialize")
-        store.create(entry1)
-        store.create(entry2)
-        store.create(entry3)
+        store = spyk(EntryStore("test.json"))
+        every { store["serialize"]() } returns "serialize"
+        every { store["deserialize"]() } returns "deserialize"
+        store.addAll(listOf(entry1, entry2, entry3))
     }
 
     @Test
@@ -50,10 +49,11 @@ internal class IncomeServiceTest {
 
     @Test
     fun add() {
-        val newEntry = mockk<Entry>()
+        val newEntry = spyk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 100F
         every { newEntry.type } returns EntryType.INCOME
+        every { newEntry.getSignedAmount() } returns 100F
 
         store.create(newEntry)
 
@@ -63,10 +63,11 @@ internal class IncomeServiceTest {
 
     @Test
     fun spend() {
-        val newEntry = mockk<Entry>()
+        val newEntry = spyk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 75F
         every { newEntry.type } returns EntryType.EXPENSE
+        every { newEntry.getSignedAmount() } returns -75F
 
         store.create(newEntry)
 
