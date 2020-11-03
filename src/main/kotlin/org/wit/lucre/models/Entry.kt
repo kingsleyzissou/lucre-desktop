@@ -1,6 +1,7 @@
 package org.wit.lucre.models
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
+import org.wit.lucre.repositories.CategoryStore
 import tornadofx.* // ktlint-disable no-wildcard-imports
 import java.time.LocalDateTime
 import javax.json.JsonObject
@@ -10,7 +11,7 @@ class Entry(
     type: Enum<EntryType>? = null,
     vendor: String? = null,
     description: String? = null,
-    category: String? = null,
+    category: Category? = null,
     vault: String? = null,
     override var id: String = NanoIdUtils.randomNanoId(),
     date: LocalDateTime = LocalDateTime.now()
@@ -27,9 +28,21 @@ class Entry(
     var type: Enum<EntryType> by property(type)
     var vendor: String by property(vendor)
     var description: String by property(description)
-    var category: String by property(category)
+    var category: Category by property(category)
     var vault: String by property(vault)
     var date: LocalDateTime by property(date)
+
+    fun getSignedAmount(): Float {
+        if (type == EntryType.INCOME) {
+            return amount
+        }
+        return amount * -1
+    }
+
+    private fun categoryFromId(id: String): Category {
+        val store = CategoryStore()
+        return store.find(id)!!
+    }
 
     override fun updateModel(json: JsonObject) {
         with(json) {
@@ -37,9 +50,9 @@ class Entry(
             type = EntryType.valueOf(string("type").toString())
             vendor = string("vendor").toString()
             description = string("description").toString()
-            category = string("category").toString()
             date = datetime("date")!!
             id = string("id").toString()
+            category = categoryFromId(string("category").toString())
         }
     }
 
@@ -49,7 +62,7 @@ class Entry(
             add("type", type.toString())
             add("vendor", vendor)
             add("description", description)
-            add("category", category)
+            add("category", category.id)
             add("vault", vault)
             add("date", date)
             add("id", id)
