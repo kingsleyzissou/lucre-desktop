@@ -3,16 +3,13 @@ package org.wit.lucre.controllers
 import org.wit.lucre.models.Category
 import org.wit.lucre.models.Entry
 import org.wit.lucre.models.Vault
-import org.wit.lucre.repositories.CategoryStore
 import org.wit.lucre.repositories.EntryStore
 import org.wit.lucre.repositories.VaultStore
 import tornadofx.Controller
 
 class VaultController : Controller() {
 
-    private val vaults = VaultStore()
-    private val categories = CategoryStore()
-    private val entries = EntryStore()
+    private val store = VaultStore()
 
     var category = Category(
         "Takeout",
@@ -21,26 +18,11 @@ class VaultController : Controller() {
     )
 
     fun index(): List<Vault> {
-//        categories.create(category)
-//        entries.create(
-//            Entry(
-//                10F,
-//                EntryType.EXPENSE,
-//                "Tesco",
-//                "Dinner",
-//                category.id,
-//                "AzwoXYC9wzohxgvvt7RNe"
-//            )
-//        )
-        return vaults.all()
-    }
-
-    fun show(): List<Entry> {
-        return entries.all()
+        return store.all()
     }
 
     fun create(name: String, currency: String, description: String = "") {
-        vaults.create(
+        store.create(
             Vault(
                 name,
                 description,
@@ -50,7 +32,7 @@ class VaultController : Controller() {
     }
 
     fun update(id: String, name: String, currency: String, description: String = "") {
-        vaults.update(
+        store.update(
             Vault(
                 name,
                 description,
