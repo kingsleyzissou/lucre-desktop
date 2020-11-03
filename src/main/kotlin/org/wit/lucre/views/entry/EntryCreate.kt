@@ -64,14 +64,7 @@ class EntryCreate : Fragment("Create Entry") {
     }
 
     private fun create() {
-        entryController.create(
-            model.amount.value.toFloat(),
-            model.type.value,
-            model.vendor.value,
-            model.category.value,
-            vault.item.id,
-            model.description.value
-        )
+        entryController.create(model.item)
         back()
     }
 
