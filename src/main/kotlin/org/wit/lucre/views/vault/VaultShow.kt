@@ -1,5 +1,6 @@
 package org.wit.lucre.views.vault
 
+import javafx.scene.text.Font
 import org.wit.lucre.viewmodels.VaultModel
 import org.wit.lucre.views.entry.EntryIndex
 import tornadofx.* // ktlint-disable no-wildcard-imports
@@ -10,7 +11,11 @@ class VaultShow : Fragment("Show Vault") {
     private val entryView = getEntryIndexView()
 
     override val root = borderpane {
-        top = label(model.name)
+        top = vbox {
+            text(model.name) {
+                font = Font(20.0)
+            }
+        }
         center = entryView.root
     }
 
