@@ -14,6 +14,10 @@ class EntryController : Controller() {
         return store.all()
     }
 
+    fun find(id: String): Entry {
+        return store.find(id)!!
+    }
+
     fun create(
         amount: Float,
         type: Enum<EntryType>,
@@ -32,5 +36,9 @@ class EntryController : Controller() {
                 vault
             )
         )
+    }
+
+    fun update(entry: Entry) {
+        store.update(entry)
     }
 }
