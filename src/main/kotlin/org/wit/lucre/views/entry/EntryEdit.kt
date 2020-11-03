@@ -40,12 +40,11 @@ class EntryEdit : Fragment("Edit Entry") {
                     useMaxSize = true
                 }
                 field {
-                    button("Clear") {
-                        action { model.rollback() }
-                        isCancelButton = true
+                    button("Clear").action {
+                        model.rollback()
                     }
-                    button("Create") {
-                        enableWhen(model.valid)
+                    button("Update") {
+                        enableWhen(model.valid and model.dirty)
                         isDefaultButton = true
                         action {
                             model.commit()
