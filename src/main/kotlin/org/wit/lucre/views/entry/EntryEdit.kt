@@ -1,30 +1,19 @@
 package org.wit.lucre.views.entry
 
-import javafx.beans.property.SimpleFloatProperty
-import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.Property
 import org.wit.lucre.controllers.CategoryController
 import org.wit.lucre.controllers.EntryController
-import org.wit.lucre.models.Category
-import org.wit.lucre.models.Entry
 import org.wit.lucre.models.EntryType
 import org.wit.lucre.viewmodels.EntryModel
 import org.wit.lucre.viewmodels.VaultModel
 import org.wit.lucre.views.vault.VaultShow
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 
-class EntryCreate : Fragment("Create Entry") {
+class EntryEdit : Fragment("Edit Entry") {
+    private val model: EntryModel by inject()
     private val vault: VaultModel by inject()
     private val entryController: EntryController by inject()
     private val categoryController: CategoryController by inject()
-
-    val model: EntryModel = EntryModel(Entry())
-
-    private val vendor = model.bind { SimpleStringProperty() }
-    private val type = model.bind { SimpleObjectProperty<Enum<EntryType>>() }
-    private val description = model.bind { SimpleStringProperty() }
-    private val amount = model.bind { SimpleFloatProperty() }
-    private val category = model.bind { SimpleObjectProperty<Category>() }
 
     private val types = listOf<Enum<EntryType>>(
         EntryType.EXPENSE, EntryType.INCOME
@@ -40,7 +29,7 @@ class EntryCreate : Fragment("Create Entry") {
                     textfield(model.description)
                 }
                 field("Amount:") {
-                    textfield(amount).required()
+                    textfield(model.amount as Property<Number>).required()
                 }
                 field("Expense Type:") {
                     combobox(model.type, types).required()
@@ -60,7 +49,7 @@ class EntryCreate : Fragment("Create Entry") {
                         isDefaultButton = true
                         action {
                             model.commit()
-                            create()
+                            update()
                         }
                     }
                 }
@@ -68,15 +57,8 @@ class EntryCreate : Fragment("Create Entry") {
         }
     }
 
-    private fun create() {
-        entryController.create(
-            amount.value.toFloat(),
-            model.type.value,
-            model.vendor.value,
-            model.category.value,
-            vault.item.id,
-            model.description.value
-        )
+    private fun update() {
+        entryController.update(model.item)
         back()
     }
 
@@ -86,4 +68,3 @@ class EntryCreate : Fragment("Create Entry") {
         replaceWith(find<VaultShow>(scope))
     }
 }
-
