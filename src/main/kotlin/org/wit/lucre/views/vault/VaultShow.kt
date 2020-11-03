@@ -3,7 +3,7 @@ package org.wit.lucre.views.vault
 import javafx.scene.text.Font
 import org.wit.lucre.viewmodels.VaultModel
 import org.wit.lucre.views.entry.EntryIndex
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 
 class VaultShow : Fragment("Show Vault") {
     val model: VaultModel by inject()

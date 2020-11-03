@@ -1,9 +1,8 @@
 package org.wit.lucre.views.vault
 
-import javafx.beans.property.SimpleStringProperty
 import org.wit.lucre.controllers.VaultController
 import org.wit.lucre.viewmodels.VaultModel
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 
 class VaultEdit : Fragment("Edit Vault") {
     private val vaultController: VaultController by inject()

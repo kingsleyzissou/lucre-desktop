@@ -2,7 +2,7 @@ package org.wit.lucre.models
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import org.wit.lucre.repositories.CategoryStore
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 import java.time.LocalDateTime
 import javax.json.JsonObject
 

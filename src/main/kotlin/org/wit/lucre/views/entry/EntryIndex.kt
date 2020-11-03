@@ -4,7 +4,7 @@ import org.wit.lucre.controllers.EntryController
 import org.wit.lucre.models.Entry
 import org.wit.lucre.viewmodels.EntryModel
 import org.wit.lucre.viewmodels.VaultModel
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 
 class EntryIndex : Fragment("List Entries") {
     val vault: VaultModel by inject()

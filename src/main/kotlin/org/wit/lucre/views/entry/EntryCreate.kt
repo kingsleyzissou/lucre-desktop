@@ -1,18 +1,14 @@
 package org.wit.lucre.views.entry
 
 import javafx.beans.property.Property
-import javafx.beans.property.SimpleFloatProperty
-import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.property.SimpleStringProperty
 import org.wit.lucre.controllers.CategoryController
 import org.wit.lucre.controllers.EntryController
-import org.wit.lucre.models.Category
 import org.wit.lucre.models.Entry
 import org.wit.lucre.models.EntryType
 import org.wit.lucre.viewmodels.EntryModel
 import org.wit.lucre.viewmodels.VaultModel
 import org.wit.lucre.views.vault.VaultShow
-import tornadofx.* // ktlint-disable no-wildcard-imports
+import tornadofx.*
 
 class EntryCreate : Fragment("Create Entry") {
     private val vault: VaultModel by inject()
@@ -74,4 +70,3 @@ class EntryCreate : Fragment("Create Entry") {
         replaceWith(find<VaultShow>(scope))
     }
 }
-

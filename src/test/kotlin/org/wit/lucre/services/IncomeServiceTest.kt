@@ -1,7 +1,7 @@
 package org.wit.lucre.services
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
-import io.mockk.* // ktlint-disable no-wildcard-imports
+import io.mockk.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
