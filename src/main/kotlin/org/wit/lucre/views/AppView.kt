@@ -9,10 +9,8 @@ import tornadofx.label
 class AppView() : View("Lucre 1.0") {
 
     private val vaultIndex = find(VaultIndex::class)
-    private val menu = find(Menu::class)
 
     override val root = borderpane() {
-        top = menu.root
         center = drawer {
             item("Vaults", expanded = true) {
                 borderpane() {
