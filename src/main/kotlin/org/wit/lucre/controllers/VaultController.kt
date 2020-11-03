@@ -25,14 +25,7 @@ class VaultController : Controller() {
         store.create(vault)
     }
 
-    fun update(id: String, name: String, currency: String, description: String = "") {
-        store.update(
-            Vault(
-                name,
-                description,
-                currency,
-                id
-            )
-        )
+    fun update(vault: Vault) {
+        store.update(vault)
     }
 }
