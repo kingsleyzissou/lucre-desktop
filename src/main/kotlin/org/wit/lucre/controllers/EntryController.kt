@@ -1,15 +1,36 @@
 package org.wit.lucre.controllers
 
+import org.wit.lucre.models.Category
 import org.wit.lucre.models.Entry
+import org.wit.lucre.models.EntryType
 import org.wit.lucre.repositories.EntryStore
 import tornadofx.Controller
 
 class EntryController : Controller() {
 
-    private val entries = EntryStore()
+    private val store = EntryStore()
 
     fun index(): List<Entry> {
-        return entries.all()
+        return store.all()
     }
 
+    fun create(
+        amount: Float,
+        type: Enum<EntryType>,
+        vendor: String,
+        category: Category,
+        vault: String,
+        description: String = ""
+    ) {
+        store.create(
+            Entry(
+                amount,
+                type,
+                vendor,
+                description,
+                category,
+                vault
+            )
+        )
+    }
 }
