@@ -38,4 +38,8 @@ class Category(
             add("id", id)
         }
     }
+
+    override fun toString(): String {
+        return name
+    }
 }
