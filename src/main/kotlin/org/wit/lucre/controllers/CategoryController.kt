@@ -11,4 +11,12 @@ class CategoryController : Controller() {
     fun index(): List<Category> {
         return store.all()
     }
+
+    fun create(category: Category) {
+        store.create(category)
+    }
+
+    fun update(category: Category) {
+        store.update(category)
+    }
 }

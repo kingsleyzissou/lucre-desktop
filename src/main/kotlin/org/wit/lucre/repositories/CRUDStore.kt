@@ -17,6 +17,8 @@ abstract class CRUDStore<T : Model>(var filename: String) : CRUDStoreInterface<T
         }
     }
 
+    // TODO("Add delete functionality")
+
     override fun all(): List<T> {
         return list.values.toList()
     }

@@ -1,14 +1,15 @@
-package org.wit.lucre.views.vault
+package org.wit.lucre.views.category
 
 import javafx.geometry.Pos
-import org.wit.lucre.controllers.VaultController
-import org.wit.lucre.models.Vault
-import org.wit.lucre.viewmodels.VaultModel
+import org.wit.lucre.controllers.CategoryController
+import org.wit.lucre.models.Category
+import org.wit.lucre.viewmodels.CategoryModel
 import tornadofx.*
 
-class VaultIndex : Fragment("Vault List") {
-    private val vaultController: VaultController by inject()
-    private val vaults = vaultController.index()
+class CategoryIndex : Fragment("Category List") {
+    val categoryController: CategoryController by inject()
+
+    var categories = categoryController.index().toObservable()
 
     override val root = borderpane {
         top = vbox {
@@ -21,7 +22,7 @@ class VaultIndex : Fragment("Vault List") {
             }
             separator { }
         }
-        center = datagrid(vaults) {
+        center = datagrid(categories) {
             cellCache {
                 label(it.name)
             }
@@ -29,16 +30,16 @@ class VaultIndex : Fragment("Vault List") {
         }
     }
 
-    private fun switch(vault: Vault?) {
-        if (vault == null) {
-            var view = find(VaultCreate::class)
+    private fun switch(category: Category?) {
+        if (category == null) {
+            var view = find(CategoryCreate::class)
             replaceWith(view, ViewTransition.FadeThrough(0.5.seconds))
             return
         }
-        val model = VaultModel(vault)
+        val model = CategoryModel(category)
         val scope = Scope()
         setInScope(model, scope)
-        var view = find(VaultShow::class, scope)
+        var view = find(CategoryShow::class, scope)
         replaceWith(view, ViewTransition.FadeThrough(0.5.seconds))
     }
 }

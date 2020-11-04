@@ -1,5 +1,6 @@
 package org.wit.lucre.models
 
+import javafx.scene.paint.Color
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -10,14 +11,14 @@ internal class CategoryModelTest {
 
     private final val EXPECTED_NAME = "Takeout"
     private final val EXPECTED_DESCRIPTION = "Dine-in and takeaways"
-    private final val EXPECTED_COlOR = "#ff0000"
+    private final val EXPECTED_COlOR = Color.web("#ff0000")
 
     @BeforeEach
     internal fun setup() {
         category = Category(
             "Takeout",
             "Dine-in and takeaways",
-            "#ff0000"
+            Color.web("#ff0000")
         )
     }
 
@@ -52,7 +53,7 @@ internal class CategoryModelTest {
 
     @Test
     fun setColor() {
-        val newColor = "#00ff00"
+        val newColor = Color.web("#00ff00")
         category.color = newColor
         assertEquals(newColor, category.color)
     }
