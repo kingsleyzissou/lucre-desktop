@@ -1,5 +1,6 @@
 package org.wit.lucre.controllers
 
+import javafx.scene.paint.Color
 import org.wit.lucre.models.Category
 import org.wit.lucre.models.Vault
 import org.wit.lucre.repositories.VaultStore
@@ -8,12 +9,6 @@ import tornadofx.Controller
 class VaultController : Controller() {
 
     private val store = VaultStore()
-
-    var category = Category(
-        "Takeout",
-        "Dine-in and takeaways",
-        "#ff0000"
-    )
 
     fun index(): List<Vault> {
         return store.all()
