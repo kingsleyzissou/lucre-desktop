@@ -23,6 +23,10 @@ class Category(
     var description: String by property(description)
     var color: Color by property(color)
 
+    val hexColor: String get() {
+        return toHexString(this.color)!!
+    }
+
     override fun updateModel(json: JsonObject) {
         with(json) {
             name = string("name").toString()
@@ -33,11 +37,10 @@ class Category(
     }
 
     override fun toJSON(json: JsonBuilder) {
-        val hexString = toHexString(this.color)
         with(json) {
             add("name", name)
             add("description", description)
-            add("color", hexString)
+            add("color", hexColor)
             add("id", id)
         }
     }
