@@ -17,7 +17,8 @@ class EntryIndex : Fragment("List Entries") {
         readonlyColumn("Vendor", Entry::vendor)
         readonlyColumn("Description", Entry::description)
         readonlyColumn("Category", Entry::category)
-        readonlyColumn("Amount (${vault.item.currency})", Entry::amount)
+        readonlyColumn("Amount (${vault.item.currency})", Entry::signedAmount)
+        readonlyColumn("Date", Entry::simpleDate)
         bindSelected(model)
 
         subscribe<EntriesFilterEvent> { event ->
