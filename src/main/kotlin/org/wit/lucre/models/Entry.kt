@@ -50,6 +50,7 @@ class Entry(
             type = EntryType.valueOf(string("type").toString())
             vendor = string("vendor").toString()
             description = string("description").toString()
+            vault = string("vault").toString()
             date = datetime("date")!!
             id = string("id").toString()
             category = categoryFromId(string("category").toString())

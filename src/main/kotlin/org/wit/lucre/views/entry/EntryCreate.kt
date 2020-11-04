@@ -1,6 +1,8 @@
 package org.wit.lucre.views.entry
 
 import javafx.beans.property.Property
+import javafx.geometry.Pos
+import javafx.scene.text.Font
 import org.wit.lucre.controllers.CategoryController
 import org.wit.lucre.controllers.EntryController
 import org.wit.lucre.models.Entry
@@ -21,37 +23,50 @@ class EntryCreate : Fragment("Create Entry") {
         EntryType.EXPENSE, EntryType.INCOME
     )
 
-    override val root = vbox {
-        form {
-            fieldset {
-                field("Shop:") {
-                    textfield(model.vendor).required()
-                }
-                field("Description:") {
-                    textfield(model.description)
-                }
-                field("Amount:") {
-                    textfield(model.amount as Property<Number>).required()
-                }
-                field("Expense Type:") {
-                    combobox(model.type, types).required()
-                    useMaxSize = true
-                }
-                field("Category:") {
-                    combobox(model.category, categoryController.index()).required()
-                    useMaxSize = true
-                }
-                field {
-                    button("Clear") {
-                        action { model.rollback() }
-                        isCancelButton = true
+    override val root = borderpane {
+        top = vbox {
+            vboxConstraints { marginBottom = 20.0 }
+            hbox {
+                button("Back").action { back() }
+                alignment = Pos.TOP_RIGHT
+            }
+            separator { }
+            text("Create entry:") {
+                font = Font(14.0)
+            }
+        }
+        center = vbox {
+            form {
+                fieldset {
+                    field("Shop:") {
+                        textfield(model.vendor).required()
                     }
-                    button("Create") {
-                        enableWhen(model.valid)
-                        isDefaultButton = true
-                        action {
-                            model.commit()
-                            create()
+                    field("Description:") {
+                        textfield(model.description)
+                    }
+                    field("Amount:") {
+                        textfield(model.amount as Property<Number>).required()
+                    }
+                    field("Expense Type:") {
+                        combobox(model.type, types).required()
+                        useMaxSize = true
+                    }
+                    field("Category:") {
+                        combobox(model.category, categoryController.index()).required()
+                        useMaxSize = true
+                    }
+                    field {
+                        button("Clear") {
+                            action { model.rollback() }
+                            isCancelButton = true
+                        }
+                        button("Create") {
+                            enableWhen(model.valid)
+                            isDefaultButton = true
+                            action {
+                                model.commit()
+                                create()
+                            }
                         }
                     }
                 }
@@ -66,7 +81,8 @@ class EntryCreate : Fragment("Create Entry") {
 
     private fun back() {
         val scope = Scope()
-        setInScope(vault, scope)
-        replaceWith(find<VaultShow>(scope))
+        setInScope(model, scope)
+        var view = find(VaultShow::class, scope)
+        replaceWith(view, ViewTransition.FadeThrough(0.4.seconds))
     }
 }
