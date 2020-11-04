@@ -1,6 +1,7 @@
 package org.wit.lucre.models
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
+import javafx.scene.paint.Color
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -20,7 +21,7 @@ internal class EntryModelTest {
     private val category: Category = Category(
         "Takeout",
         "Dine-in and takeaways",
-        "#ff0000"
+        Color.web("#ff0000")
     )
 
     private final val EXPECTED_ID: String = id
@@ -116,7 +117,7 @@ internal class EntryModelTest {
         val newCategory = Category(
             "Bills",
             "Household bills",
-            "#fff"
+            Color.web("#fff")
         )
         expense.category = newCategory
         assertEquals(newCategory, expense.category)
