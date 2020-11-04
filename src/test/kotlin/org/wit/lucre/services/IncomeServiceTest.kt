@@ -11,9 +11,9 @@ import org.wit.lucre.repositories.EntryStore
 
 internal class IncomeServiceTest {
 
-    private val entry1 = spyk<Entry>()
-    private val entry2 = spyk<Entry>()
-    private val entry3 = spyk<Entry>()
+    private val entry1 = mockk<Entry>()
+    private val entry2 = mockk<Entry>()
+    private val entry3 = mockk<Entry>()
     private val service: IncomeService = IncomeService()
 
     private lateinit var store: EntryStore
@@ -23,17 +23,17 @@ internal class IncomeServiceTest {
         every { entry1.id } returns NanoIdUtils.randomNanoId()
         every { entry1.amount } returns 5F
         every { entry1.type } returns EntryType.EXPENSE
-        every { entry1.getSignedAmount() } returns -5F
+        every { entry1.signedAmount } returns -5F
 
         every { entry2.id } returns NanoIdUtils.randomNanoId()
         every { entry2.amount } returns 10F
         every { entry2.type } returns EntryType.EXPENSE
-        every { entry2.getSignedAmount() } returns -10F
+        every { entry2.signedAmount } returns -10F
 
         every { entry3.id } returns NanoIdUtils.randomNanoId()
         every { entry3.amount } returns 15F
         every { entry3.type } returns EntryType.INCOME
-        every { entry3.getSignedAmount() } returns 15F
+        every { entry3.signedAmount } returns 15F
 
         store = spyk(EntryStore("test.json"))
         every { store["serialize"]() } returns "serialize"
@@ -53,7 +53,7 @@ internal class IncomeServiceTest {
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 100F
         every { newEntry.type } returns EntryType.INCOME
-        every { newEntry.getSignedAmount() } returns 100F
+        every { newEntry.signedAmount } returns 100F
 
         store.create(newEntry)
 
@@ -63,11 +63,11 @@ internal class IncomeServiceTest {
 
     @Test
     fun spend() {
-        val newEntry = spyk<Entry>()
+        val newEntry = mockk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 75F
         every { newEntry.type } returns EntryType.EXPENSE
-        every { newEntry.getSignedAmount() } returns -75F
+        every { newEntry.signedAmount } returns -75F
 
         store.create(newEntry)
 
