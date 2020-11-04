@@ -10,6 +10,9 @@ class EntryIndex : Fragment("List Entries") {
     val vault: VaultModel by inject()
     val model = EntryModel(Entry())
 
+    // TODO("Add delete functionality")
+    // TODO("Link functionality")
+
     override val root = tableview<Entry> {
         readonlyColumn("Vendor", Entry::vendor)
         readonlyColumn("Description", Entry::description)

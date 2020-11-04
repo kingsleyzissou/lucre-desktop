@@ -8,7 +8,6 @@ import org.wit.lucre.viewmodels.VaultModel
 import tornadofx.*
 
 class VaultCreate : Fragment("Create Vault") {
-
     private val vaultController: VaultController by inject()
     private var model = VaultModel(Vault())
 
@@ -66,9 +65,7 @@ class VaultCreate : Fragment("Create Vault") {
     }
 
     private fun back() {
-        val scope = Scope()
-        setInScope(model, scope)
-        var view = find(VaultIndex::class, scope)
+        var view = find(VaultIndex::class)
         replaceWith(view, ViewTransition.FadeThrough(0.4.seconds))
     }
 }

@@ -8,28 +8,28 @@ import tornadofx.*
 
 class VaultIndex : Fragment("Vault List") {
     private val vaultController: VaultController by inject()
-    private val data = vaultController.index()
+    private val vaults = vaultController.index()
 
     override val root = borderpane {
         top = vbox {
             vboxConstraints { marginBottom = 20.0 }
             hbox {
                 button("Create") {
-                    action { switch(null, "create") }
+                    action { switch(null) }
                 }
                 alignment = Pos.TOP_RIGHT
             }
             separator { }
         }
-        center = datagrid(data) {
+        center = datagrid(vaults) {
             cellCache {
                 label(it.name)
             }
-            onUserSelect(2) { switch(it, "show") }
+            onUserSelect(2) { switch(it) }
         }
     }
 
-    private fun switch(vault: Vault?, view: String) {
+    private fun switch(vault: Vault?) {
         if (vault == null) {
             var view = find(VaultCreate::class)
             replaceWith(view, ViewTransition.FadeThrough(0.5.seconds))
