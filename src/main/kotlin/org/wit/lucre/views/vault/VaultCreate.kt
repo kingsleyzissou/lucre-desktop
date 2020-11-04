@@ -1,5 +1,7 @@
 package org.wit.lucre.views.vault
 
+import javafx.geometry.Pos
+import javafx.scene.text.Font
 import org.wit.lucre.controllers.VaultController
 import org.wit.lucre.models.Vault
 import org.wit.lucre.viewmodels.VaultModel
@@ -14,30 +16,43 @@ class VaultCreate : Fragment("Create Vault") {
         "$", "£", "€", "AED", "R", "R$", "¥"
     )
 
-    override val root = vbox {
-        form {
-            fieldset {
-                field("Vault name:") {
-                    textfield(model.name).required()
-                }
-                field("Description:") {
-                    textfield(model.description)
-                }
-                field("Currency:") {
-                    combobox<String>(model.currency, currencies).required()
-                    useMaxSize = true
-                }
-                field {
-                    button("Clear") {
-                        action { model.rollback() }
-                        isCancelButton = true
+    override val root = borderpane {
+        top = vbox {
+            vboxConstraints { marginBottom = 20.0 }
+            hbox {
+                button("Back").action { back() }
+                alignment = Pos.TOP_RIGHT
+            }
+            separator { }
+            text("Create vault:") {
+                font = Font(14.0)
+            }
+        }
+        center = vbox {
+            form {
+                fieldset {
+                    field("Vault name:") {
+                        textfield(model.name).required()
                     }
-                    button("Create") {
-                        enableWhen(model.valid)
-                        isDefaultButton = true
-                        action {
-                            model.commit()
-                            create()
+                    field("Description:") {
+                        textfield(model.description)
+                    }
+                    field("Currency:") {
+                        combobox<String>(model.currency, currencies).required()
+                        useMaxSize = true
+                    }
+                    field {
+                        button("Clear") {
+                            action { model.rollback() }
+                            isCancelButton = true
+                        }
+                        button("Create") {
+                            enableWhen(model.valid)
+                            isDefaultButton = true
+                            action {
+                                model.commit()
+                                create()
+                            }
                         }
                     }
                 }
@@ -47,6 +62,13 @@ class VaultCreate : Fragment("Create Vault") {
 
     private fun create() {
         vaultController.create(model.item)
-        replaceWith(VaultIndex::class)
+        back()
+    }
+
+    private fun back() {
+        val scope = Scope()
+        setInScope(model, scope)
+        var view = find(VaultIndex::class, scope)
+        replaceWith(view, ViewTransition.FadeThrough(0.4.seconds))
     }
 }

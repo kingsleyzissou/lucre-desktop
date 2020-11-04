@@ -1,10 +1,7 @@
 package org.wit.lucre.views
 
 import org.wit.lucre.views.vault.VaultIndex
-import tornadofx.View
-import tornadofx.borderpane
-import tornadofx.drawer
-import tornadofx.label
+import tornadofx.*
 
 class AppView() : View("Lucre 1.0") {
 
@@ -13,9 +10,7 @@ class AppView() : View("Lucre 1.0") {
     override val root = borderpane() {
         center = drawer {
             item("Vaults", expanded = true) {
-                borderpane() {
-                    center = vaultIndex.root
-                }
+                this += vaultIndex.root
             }
             item("Categories", expanded = false) {
                 label("TODO")

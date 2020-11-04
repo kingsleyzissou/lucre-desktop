@@ -19,7 +19,6 @@ class EntryIndex : Fragment("List Entries") {
 
         subscribe<EntriesFilterEvent> { event ->
             val entries = event.entries.toObservable()
-            println(entries.size)
             items.setAll(entries)
         }
     }
