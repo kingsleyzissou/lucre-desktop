@@ -20,6 +20,6 @@ class VaultIndex : Fragment("Vault List") {
         val model = VaultModel(vault)
         val scope = Scope()
         setInScope(model, scope)
-        replaceWith(find<VaultShow>(scope))
+        replaceWith(find(VaultShow::class, scope))
     }
 }
