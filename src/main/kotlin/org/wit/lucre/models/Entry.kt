@@ -3,6 +3,7 @@ package org.wit.lucre.models
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import org.wit.lucre.repositories.CategoryStore
 import tornadofx.*
+import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.json.JsonObject
 
@@ -32,12 +33,14 @@ class Entry(
     var vault: String by property(vault)
     var date: LocalDateTime by property(date)
 
-    fun getSignedAmount(): Float {
+    val signedAmount: Float get() {
         if (type == EntryType.INCOME) {
             return amount
         }
         return amount * -1
     }
+
+    val simpleDate: LocalDate get() = date.toLocalDate()
 
     private fun categoryFromId(id: String): Category {
         val store = CategoryStore()

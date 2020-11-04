@@ -1,5 +1,6 @@
 package org.wit.lucre.controllers
 
+import org.wit.lucre.models.Category
 import org.wit.lucre.models.Entry
 import org.wit.lucre.repositories.EntryStore
 import org.wit.lucre.services.IncomeService
@@ -19,7 +20,7 @@ class EntryController : Controller() {
         return store.where(predicate)
     }
 
-    fun chartData(entries: List<Entry>): Map<String, Double> {
+    fun chartData(entries: List<Entry>): Map<Category, Double> {
         return service.expenseCategories(entries)
     }
 
