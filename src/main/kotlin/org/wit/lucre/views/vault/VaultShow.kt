@@ -63,10 +63,10 @@ class VaultShow : Fragment("Show Vault") {
         return find(EntryChart::class, scope)
     }
 
-    private fun switch(view: String?) {
+    private fun switch(action: String?) {
         val scope = Scope()
         setInScope(model, scope)
-        var view = when (view) {
+        var view = when (action) {
             ("edit") -> find(VaultEdit::class, scope)
             ("create") -> find(EntryCreate::class, scope)
             else -> find(VaultIndex::class)
