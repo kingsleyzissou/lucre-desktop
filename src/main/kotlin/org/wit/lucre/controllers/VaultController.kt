@@ -1,7 +1,5 @@
 package org.wit.lucre.controllers
 
-import javafx.scene.paint.Color
-import org.wit.lucre.models.Category
 import org.wit.lucre.models.Vault
 import org.wit.lucre.repositories.VaultStore
 import tornadofx.Controller

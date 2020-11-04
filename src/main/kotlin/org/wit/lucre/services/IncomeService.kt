@@ -18,7 +18,8 @@ class IncomeService() {
             .groupBy { it.category }
             .mapKeys { it.key.name }
             .mapValues {
-                e -> e.value
+                e ->
+                e.value
                     .map { it.amount.toDouble() }
                     .reduce { acc, it -> acc + it }
             }
