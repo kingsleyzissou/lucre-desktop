@@ -5,12 +5,16 @@ import org.wit.lucre.models.Entry
 import org.wit.lucre.viewmodels.EntryModel
 import org.wit.lucre.viewmodels.VaultModel
 import tornadofx.*
+import java.util.function.Predicate
 
 class EntryIndex : Fragment("List Entries") {
     val vault: VaultModel by inject()
     val model = EntryModel(Entry())
     private val entryController: EntryController by inject()
-    private val data = entryController.index().asObservable()
+
+    private val data = entryController
+        .filter(Predicate<Entry> { p -> p.vault == vault.item.id })
+        .asObservable()
 
     override val root = tableview(data) {
         readonlyColumn("Vendor", Entry::vendor)
