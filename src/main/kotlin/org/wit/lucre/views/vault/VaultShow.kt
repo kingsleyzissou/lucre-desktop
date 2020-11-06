@@ -26,7 +26,6 @@ class VaultShow : Fragment("Show Vault") {
 
     private var date = LocalDate.now()
     private var label = label(date.month.toString())
-//    private val monthLabel = dateLabel.stringBinding{ date.month.toString() }
 
     override val root = borderpane {
         top = vbox {
@@ -61,6 +60,10 @@ class VaultShow : Fragment("Show Vault") {
         center = entryView.root
     }
 
+    /**
+     * Method called once the fragment
+     * has loaded
+     */
     override fun onDock() {
         subscribeToEntryRequest()
         subscribeToSceneSwitch()
@@ -68,6 +71,11 @@ class VaultShow : Fragment("Show Vault") {
         fire(LoadEntriesRequest())
     }
 
+    /**
+     * Used for subscribing to requests
+     * for new entries, used for syncing data between
+     * parent and child view components
+     */
     private fun subscribeToEntryRequest() {
         subscribe<EntriesFilterRequest> {
             val entries = entryController.filter(it.predicate)
@@ -75,12 +83,22 @@ class VaultShow : Fragment("Show Vault") {
         }
     }
 
+    /**
+     * Used for subscribing to requests
+     * for switching scenes, used for syncing data between
+     * parent and child view components
+     */
     private fun subscribeToSceneSwitch() {
         subscribe<SwitchScenesRequest> {
             switch(it.fragment, it.transition)
         }
     }
 
+    /**
+     * Used for subscribing to new entries being returned
+     * from the controller. Used for syncing data between
+     * parent and child view components
+     */
     private fun subscribeToLoadEntries() {
         subscribe<LoadEntriesRequest> {
             val predicate = Predicate<Entry> {
@@ -92,12 +110,20 @@ class VaultShow : Fragment("Show Vault") {
         }
     }
 
+    /**
+     * Method for updating the date
+     * and loading new entries based
+     * on the date change
+     */
     private fun changeDate(value: Long) {
         date = date.plusMonths(value)
         label.text = date.month.toString()
         fire(LoadEntriesRequest())
     }
 
+    /**
+     * Load the Entry Index fragment
+     */
     private fun getEntryIndexView(): EntryIndex {
         val v = VaultModel(model.item)
         val scope = Scope()
@@ -105,6 +131,9 @@ class VaultShow : Fragment("Show Vault") {
         return find(EntryIndex::class, scope)
     }
 
+    /**
+     * Get the Entry Chart fragment
+     */
     private fun getChartView(): EntryChart {
         val v = VaultModel(model.item)
         val scope = Scope()
@@ -112,6 +141,9 @@ class VaultShow : Fragment("Show Vault") {
         return find(EntryChart::class, scope)
     }
 
+    /**
+     * Method for switching to another fragment
+     */
     private fun switch(action: String?) {
         val scope = Scope()
         setInScope(model, scope)
@@ -123,6 +155,9 @@ class VaultShow : Fragment("Show Vault") {
         replaceWith(view, ViewTransition.Slide(0.2.seconds))
     }
 
+    /**
+     * Method for switching to another fragment
+     */
     private fun switch(fragment: Fragment, transition: ViewTransition) {
         replaceWith(fragment, transition)
     }

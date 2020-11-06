@@ -1,5 +1,10 @@
 package org.wit.lucre.repositories
 
+/**
+ * CRUDStore interface for
+ * ensuring that all the required
+ * methods are implemented
+ */
 interface CRUDStoreInterface<T> {
     fun all(): List<T>
     fun find(id: String): T?

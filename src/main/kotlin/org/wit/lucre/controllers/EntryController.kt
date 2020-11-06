@@ -7,11 +7,22 @@ import org.wit.lucre.services.IncomeService
 import tornadofx.Controller
 import java.util.function.Predicate
 
+/**
+ * EntryController for
+ * presenting entry related
+ * views
+ */
 class EntryController : Controller() {
 
+    /** Entry data store*/
     private val store = EntryStore()
+    /** Income service for business logic on entries*/
     private val service = IncomeService()
 
+    /**
+     * Returns a list of all entries
+     * to the view
+     */
     fun index(): List<Entry> {
         return store.all()
     }

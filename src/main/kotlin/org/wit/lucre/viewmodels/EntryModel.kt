@@ -3,6 +3,9 @@ package org.wit.lucre.viewmodels
 import org.wit.lucre.models.Entry
 import tornadofx.ItemViewModel
 
+/**
+ * TornadoFX ViewModel for corresponding Entry model
+ */
 class EntryModel(entry: Entry) : ItemViewModel<Entry>(entry) {
     val amount = bind(Entry::amountProperty)
     val type = bind(Entry::typeProperty)
