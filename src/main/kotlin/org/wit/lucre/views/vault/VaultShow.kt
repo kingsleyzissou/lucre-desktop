@@ -48,7 +48,7 @@ class VaultShow : Fragment("Show Vault") {
             hbox {
                 this += chartView.root
             }
-            hbox {
+            hbox(spacing = 20) {
                 alignment = Pos.CENTER
                 button("<").action { changeDate(-1) }
                 this += label
