@@ -82,7 +82,7 @@ abstract class CRUDStore<T : Model>(var filename: String) : CRUDStoreInterface<T
      * object that will then be written
      * to a file
      */
-    private fun serialize() {
+    fun serialize() {
         var jsonObject = Json.createObjectBuilder()
         var jsonArray = Json.createArrayBuilder()
         all().map { jsonArray.add(it.toJSON()) }
