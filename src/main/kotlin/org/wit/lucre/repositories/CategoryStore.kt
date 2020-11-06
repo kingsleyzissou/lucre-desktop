@@ -1,5 +1,6 @@
 package org.wit.lucre.repositories
 
+import javafx.scene.paint.Color
 import org.wit.lucre.models.Category
 import org.wit.lucre.utilities.read
 import tornadofx.jsonArray
@@ -12,6 +13,20 @@ import javax.json.JsonObject
  * json file.
  */
 class CategoryStore(file: String = "categories.json") : CRUDStore<Category>(file) {
+
+    /**
+     * Since it is possible for a category to
+     * be deleted and entries for that category to still exist,
+     * we need to specify a fallback category
+     */
+    override fun find(id: String): Category? {
+        if (list[id] != null) return list[id]
+        return Category(
+            "Uncategorized",
+            "No category",
+            Color.web("#EEEEEE")
+        )
+    }
 
     /**
      * Custom deserialize method for the
