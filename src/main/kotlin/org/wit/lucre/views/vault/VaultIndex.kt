@@ -15,7 +15,7 @@ class VaultIndex : Fragment("Vault List") {
             vboxConstraints { marginBottom = 20.0 }
             hbox {
                 button("Create") {
-                    action { switch(null) }
+                    action { switch(null, "create") }
                 }
                 alignment = Pos.TOP_RIGHT
             }
@@ -25,20 +25,34 @@ class VaultIndex : Fragment("Vault List") {
             cellCache {
                 label(it.name)
             }
-            onUserSelect(2) { switch(it) }
+            onUserSelect(2) { switch(it, "show") }
+            contextmenu {
+                item("Edit").action {
+                    if (selectedItem != null) {
+                        switch(selectedItem!!, "edit")
+                    }
+                }
+                item("Delete").action {
+                    if (selectedItem != null) {
+                        switch(selectedItem!!, "delete")
+                    }
+                }
+            }
         }
     }
 
-    private fun switch(vault: Vault?) {
-        if (vault == null) {
-            var view = find(VaultCreate::class)
-            replaceWith(view, ViewTransition.FadeThrough(0.5.seconds))
-            return
-        }
-        val model = VaultModel(vault)
+    private fun switch(vault: Vault?, action: String) {
         val scope = Scope()
-        setInScope(model, scope)
-        var view = find(VaultShow::class, scope)
+        if (vault != null) {
+            val model = VaultModel(vault)
+            setInScope(model, scope)
+        }
+        var view = when (action) {
+            "show" -> find(VaultShow::class, scope)
+            "edit" -> find(VaultEdit::class, scope)
+            "delete" -> find(VaultDelete::class, scope)
+            else -> find(VaultCreate::class, scope)
+        }
         replaceWith(view, ViewTransition.FadeThrough(0.5.seconds))
     }
 }

@@ -23,4 +23,8 @@ class VaultController : Controller() {
     fun update(vault: Vault) {
         store.update(vault)
     }
+
+    fun delete(id: String) {
+        store.delete(id)
+    }
 }
