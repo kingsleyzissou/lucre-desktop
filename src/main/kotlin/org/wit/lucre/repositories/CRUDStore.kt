@@ -1,6 +1,5 @@
 package org.wit.lucre.repositories
 
-import mu.KotlinLogging
 import org.wit.lucre.models.Model
 import org.wit.lucre.utilities.fileExists
 import org.wit.lucre.utilities.write
