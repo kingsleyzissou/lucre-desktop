@@ -19,4 +19,8 @@ class CategoryController : Controller() {
     fun update(category: Category) {
         store.update(category)
     }
+
+    fun delete(id: String) {
+        store.delete(id)
+    }
 }

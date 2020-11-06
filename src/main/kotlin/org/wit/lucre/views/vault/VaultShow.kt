@@ -5,6 +5,8 @@ import javafx.scene.text.Font
 import org.wit.lucre.controllers.EntryController
 import org.wit.lucre.events.EntriesFilterEvent
 import org.wit.lucre.events.EntriesFilterRequest
+import org.wit.lucre.events.LoadEntriesRequest
+import org.wit.lucre.events.SwitchScenesRequest
 import org.wit.lucre.models.Entry
 import org.wit.lucre.viewmodels.VaultModel
 import org.wit.lucre.views.entry.EntryChart
@@ -30,8 +32,12 @@ class VaultShow : Fragment("Show Vault") {
                 alignment = Pos.TOP_RIGHT
             }
             separator { }
-            text(model.name) {
+            text {
                 font = Font(20.0)
+                subscribe<EntriesFilterEvent> {
+                    val balance = entryController.balance(it.entries)
+                    text = "${model.name.value} (${model.currency.value}$balance)"
+                }
             }
             hbox {
                 this += chartView.root
@@ -41,12 +47,30 @@ class VaultShow : Fragment("Show Vault") {
     }
 
     override fun onDock() {
+        subscribeToEntryRequest()
+        subscribeToSceneSwitch()
+        subscribeToLoadEntries()
+        fire(LoadEntriesRequest())
+    }
+
+    private fun subscribeToEntryRequest() {
         subscribe<EntriesFilterRequest> {
             val entries = entryController.filter(it.predicate)
             fire(EntriesFilterEvent(entries))
         }
-        var predicate = Predicate<Entry> { p -> p.vault == model.item.id }
-        fire(EntriesFilterRequest(predicate))
+    }
+
+    private fun subscribeToSceneSwitch() {
+        subscribe<SwitchScenesRequest> {
+            switch(it.fragment, it.transition)
+        }
+    }
+
+    private fun subscribeToLoadEntries() {
+        subscribe<LoadEntriesRequest> {
+            val predicate = Predicate<Entry> { p -> p.vault == model.item.id }
+            fire(EntriesFilterRequest(predicate))
+        }
     }
 
     private fun getEntryIndexView(): EntryIndex {
@@ -66,11 +90,15 @@ class VaultShow : Fragment("Show Vault") {
     private fun switch(action: String?) {
         val scope = Scope()
         setInScope(model, scope)
-        var view = when (action) {
+        val view = when (action) {
             ("edit") -> find(VaultEdit::class, scope)
             ("create") -> find(EntryCreate::class, scope)
             else -> find(VaultIndex::class)
         }
         replaceWith(view, ViewTransition.Slide(0.2.seconds))
+    }
+
+    private fun switch(fragment: Fragment, transition: ViewTransition) {
+        replaceWith(fragment, transition)
     }
 }

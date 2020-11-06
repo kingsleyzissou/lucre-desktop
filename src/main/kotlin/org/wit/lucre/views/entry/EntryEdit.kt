@@ -5,13 +5,16 @@ import javafx.geometry.Pos
 import javafx.scene.text.Font
 import org.wit.lucre.controllers.CategoryController
 import org.wit.lucre.controllers.EntryController
+import org.wit.lucre.controllers.VaultController
 import org.wit.lucre.models.EntryType
 import org.wit.lucre.viewmodels.EntryModel
+import org.wit.lucre.viewmodels.VaultModel
 import org.wit.lucre.views.vault.VaultShow
 import tornadofx.*
 
 class EntryEdit : Fragment("Edit Entry") {
     private val model: EntryModel by inject()
+    private val vaultController: VaultController by inject()
     private val entryController: EntryController by inject()
     private val categoryController: CategoryController by inject()
 
@@ -76,7 +79,8 @@ class EntryEdit : Fragment("Edit Entry") {
 
     private fun back() {
         val scope = Scope()
-        setInScope(model, scope)
+        val vault = vaultController.find(model.vault.value)
+        setInScope(VaultModel(vault), scope)
         var view = find(VaultShow::class, scope)
         replaceWith(view, ViewTransition.FadeThrough(0.4.seconds))
     }
