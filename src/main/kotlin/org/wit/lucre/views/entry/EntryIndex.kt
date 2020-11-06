@@ -12,7 +12,7 @@ class EntryIndex : Fragment("List Entries") {
     val vault: VaultModel by inject()
     val model = EntryModel(Entry())
 
-    val entries = FXCollections.observableArrayList<Entry>()
+    private val entries = FXCollections.observableArrayList<Entry>()
 
     override val root = tableview(entries) {
         readonlyColumn("Vendor", Entry::vendor)

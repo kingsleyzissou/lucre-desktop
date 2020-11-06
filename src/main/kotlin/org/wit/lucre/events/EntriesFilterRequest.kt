@@ -5,4 +5,11 @@ import tornadofx.EventBus
 import tornadofx.FXEvent
 import java.util.function.Predicate
 
-class EntriesFilterRequest(val predicate: Predicate<Entry>) : FXEvent(EventBus.RunOn.BackgroundThread)
+/**
+ * EventBus class for requesting
+ * a filtered list of events
+ * based on the desired predicate
+ */
+class EntriesFilterRequest(
+    val predicate: Predicate<Entry>
+) : FXEvent(EventBus.RunOn.BackgroundThread)
