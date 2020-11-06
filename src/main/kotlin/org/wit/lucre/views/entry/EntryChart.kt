@@ -1,8 +1,10 @@
 package org.wit.lucre.views.entry
 
+import javafx.geometry.Pos
 import javafx.scene.chart.PieChart
 import org.wit.lucre.controllers.EntryController
 import org.wit.lucre.events.EntriesFilterEvent
+import org.wit.lucre.services.IncomeService
 import tornadofx.*
 
 class EntryChart : Fragment("Chart View") {
@@ -11,6 +13,7 @@ class EntryChart : Fragment("Chart View") {
     override val root = piechart("") {
         maxHeight = 100.0
         subscribe<EntriesFilterEvent> { event ->
+            data.removeAll()
             val chartData = entryController.chartData((event.entries))
             for ((key, value) in chartData) {
                 var d = PieChart.Data(key.name, value)
@@ -20,4 +23,5 @@ class EntryChart : Fragment("Chart View") {
             }
         }
     }
+
 }
