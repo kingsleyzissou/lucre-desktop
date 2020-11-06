@@ -40,6 +40,11 @@ abstract class CRUDStore<T : Model>(var filename: String) : CRUDStoreInterface<T
         }
     }
 
+    override fun delete(id: String) {
+        list.remove(id)
+        serialize()
+    }
+
     override fun addAll(values: List<T>) {
         values.forEach { v -> this.create(v) }
     }
