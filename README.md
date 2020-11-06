@@ -1,6 +1,8 @@
 # Lucre Desktop
 Mobile App Development - First Assignment
 
+https://www.youtube.com/watch?v=JjCyPoT6Wdw&feature=youtu.be
+
 Lucre is a desktop app for keeping track of your income
 and expenses. The app has the ability to split your spending
 into different categories. The app allows for the use of mutliple
