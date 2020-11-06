@@ -35,4 +35,12 @@ class EntryController : Controller() {
     fun update(entry: Entry) {
         store.update(entry)
     }
+
+    fun delete(id: String) {
+        store.delete(id)
+    }
+
+    fun balance(entries: List<Entry>): Float {
+        return service.balance(entries)
+    }
 }
