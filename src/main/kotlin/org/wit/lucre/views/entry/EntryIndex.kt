@@ -10,7 +10,6 @@ import org.wit.lucre.viewmodels.VaultModel
 import tornadofx.*
 
 class EntryIndex : Fragment("List Entries") {
-    private val entryController: EntryController by inject()
     val vault: VaultModel by inject()
     val model = EntryModel(Entry())
 
@@ -21,7 +20,7 @@ class EntryIndex : Fragment("List Entries") {
         readonlyColumn("Description", Entry::description)
         readonlyColumn("Category", Entry::category)
         readonlyColumn("Amount (${vault.item.currency})", Entry::signedAmount)
-        readonlyColumn("Date", Entry::simpleDate)
+        readonlyColumn("Date", Entry::date)
         bindSelected(model)
 
         contextmenu {

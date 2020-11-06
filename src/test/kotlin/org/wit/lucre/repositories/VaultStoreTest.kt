@@ -65,7 +65,7 @@ internal class VaultStoreTest {
         every { vault5.description } returns "Euro"
         every { vault5.currency } returns "€"
         store.update(vault5)
-        var old = store.find(id3)
+        val old = store.find(id3)
         assertEquals(vault5.name, old?.name)
         assertEquals(vault5.description, old?.description)
         assertEquals(vault5.currency, old?.currency)

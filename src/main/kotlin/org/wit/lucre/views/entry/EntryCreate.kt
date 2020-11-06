@@ -55,6 +55,10 @@ class EntryCreate : Fragment("Create Entry") {
                         combobox(model.category, categoryController.index()).required()
                         useMaxSize = true
                     }
+                    field("Date:") {
+                        datepicker(model.date).required()
+                        useMaxSize = true
+                    }
                     field {
                         button("Clear") {
                             action { model.rollback() }
@@ -75,13 +79,14 @@ class EntryCreate : Fragment("Create Entry") {
     }
 
     private fun create() {
+        model.item.vault = vault.item.id
         entryController.create(model.item)
         back()
     }
 
     private fun back() {
         val scope = Scope()
-        setInScope(model, scope)
+        setInScope(vault, scope)
         var view = find(VaultShow::class, scope)
         replaceWith(view, ViewTransition.FadeThrough(0.4.seconds))
     }
