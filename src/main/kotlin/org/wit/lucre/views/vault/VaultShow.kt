@@ -13,6 +13,8 @@ import org.wit.lucre.views.entry.EntryChart
 import org.wit.lucre.views.entry.EntryCreate
 import org.wit.lucre.views.entry.EntryIndex
 import tornadofx.*
+import java.time.LocalDate
+import java.util.*
 import java.util.function.Predicate
 
 class VaultShow : Fragment("Show Vault") {
@@ -21,6 +23,10 @@ class VaultShow : Fragment("Show Vault") {
 
     private val entryView = getEntryIndexView()
     private val chartView = getChartView()
+
+    private var date = LocalDate.now()
+    private var label = label(date.month.toString())
+//    private val monthLabel = dateLabel.stringBinding{ date.month.toString() }
 
     override val root = borderpane {
         top = vbox {
@@ -41,6 +47,15 @@ class VaultShow : Fragment("Show Vault") {
             }
             hbox {
                 this += chartView.root
+            }
+            hbox {
+                alignment = Pos.CENTER
+                button("<").action { changeDate(-1) }
+                this += label
+                button(">").action { changeDate(+1) }
+                hboxConstraints {
+                    marginBottom = 20.0
+                }
             }
         }
         center = entryView.root
@@ -68,9 +83,19 @@ class VaultShow : Fragment("Show Vault") {
 
     private fun subscribeToLoadEntries() {
         subscribe<LoadEntriesRequest> {
-            val predicate = Predicate<Entry> { p -> p.vault == model.item.id }
+            val predicate = Predicate<Entry> {
+                it.vault == model.item.id &&
+                    it.date.year == date.year &&
+                    it.date.month == date.month
+            }
             fire(EntriesFilterRequest(predicate))
         }
+    }
+
+    private fun changeDate(value: Long) {
+        date = date.plusMonths(value)
+        label.text = date.month.toString()
+        fire(LoadEntriesRequest())
     }
 
     private fun getEntryIndexView(): EntryIndex {

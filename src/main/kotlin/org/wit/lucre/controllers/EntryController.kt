@@ -21,6 +21,7 @@ class EntryController : Controller() {
     }
 
     fun chartData(entries: List<Entry>): Map<Category, Double> {
+        if (entries.isEmpty()) return emptyMap()
         return service.expenseCategories(entries)
     }
 

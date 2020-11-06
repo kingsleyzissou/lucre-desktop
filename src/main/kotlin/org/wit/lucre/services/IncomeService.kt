@@ -18,6 +18,7 @@ class IncomeService() {
     }
 
     fun expenseCategories(entries: List<Entry>): Map<Category, Double> {
+        if (entries.isEmpty()) return emptyMap()
         var predicate = Predicate<Entry> { it.type == EntryType.EXPENSE }
         return entries.filter { predicate.test(it) }
             .groupBy { it.category.id }
