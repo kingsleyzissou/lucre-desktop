@@ -12,6 +12,10 @@ class VaultController : Controller() {
         return store.all()
     }
 
+    fun find(id: String): Vault {
+        return store.find(id)!!
+    }
+
     fun create(vault: Vault) {
         store.create(vault)
     }
