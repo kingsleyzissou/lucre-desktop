@@ -54,6 +54,10 @@ class EntryEdit : Fragment("Edit Entry") {
                         combobox(model.category, categoryController.index()).required()
                         useMaxSize = true
                     }
+                    field("Date:") {
+                        datepicker(model.date).required()
+                        useMaxSize = true
+                    }
                     field {
                         button("Clear").action {
                             model.rollback()

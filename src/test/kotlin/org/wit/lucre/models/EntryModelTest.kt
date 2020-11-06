@@ -5,14 +5,14 @@ import javafx.scene.paint.Color
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 internal class EntryModelTest {
 
     lateinit var expense: Entry
 
     private val id: String = NanoIdUtils.randomNanoId()
-    private val dateTime: LocalDateTime = LocalDateTime.now()
+    private val date: LocalDate = LocalDate.now()
     private val vault: Vault = Vault(
         "HSBC",
         "GBP Account",
@@ -29,7 +29,7 @@ internal class EntryModelTest {
     private final val EXPECTED_DESCRIPTION: String = "Dinner"
     private final val EXPECTED_AMOUNT: Float = 10F
     private final val EXPECTED_TYPE: Enum<EntryType> = EntryType.EXPENSE
-    private final val EXPECTED_DATE: LocalDateTime = dateTime
+    private final val EXPECTED_DATE: LocalDate = date
     private final val EXPECTED_CATEGORY: Category = category
     private final val EXPECTED_VAULT: String = vault.id
 
@@ -43,7 +43,7 @@ internal class EntryModelTest {
             category,
             vault.id,
             id,
-            dateTime
+            date
         )
     }
 
@@ -146,7 +146,7 @@ internal class EntryModelTest {
 
     @Test
     fun setDate() {
-        val newDate: LocalDateTime = LocalDateTime.now()
+        val newDate: LocalDate = LocalDate.now()
         expense.date = newDate
         assertEquals(newDate, expense.date)
     }

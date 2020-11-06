@@ -4,7 +4,6 @@ import com.aventrix.jnanoid.jnanoid.NanoIdUtils
 import org.wit.lucre.repositories.CategoryStore
 import tornadofx.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.json.JsonObject
 
 class Entry(
@@ -15,7 +14,7 @@ class Entry(
     category: Category? = null,
     vault: String? = null,
     override var id: String = NanoIdUtils.randomNanoId(),
-    date: LocalDateTime = LocalDateTime.now()
+    date: LocalDate = LocalDate.now()
 ) : Model() {
     fun amountProperty() = getProperty(Entry::amount)
     fun typeProperty() = getProperty(Entry::type)
@@ -31,7 +30,7 @@ class Entry(
     var description: String by property(description)
     var category: Category by property(category)
     var vault: String by property(vault)
-    var date: LocalDateTime by property(date)
+    var date: LocalDate by property(date)
 
     val signedAmount: Float get() {
         if (type == EntryType.INCOME) {
@@ -39,8 +38,6 @@ class Entry(
         }
         return amount * -1
     }
-
-    val simpleDate: LocalDate get() = date.toLocalDate()
 
     private fun categoryFromId(id: String): Category {
         val store = CategoryStore()
@@ -54,7 +51,7 @@ class Entry(
             vendor = string("vendor").toString()
             description = string("description").toString()
             vault = string("vault").toString()
-            date = datetime("date")!!
+            date = date("date")!!
             id = string("id").toString()
             category = categoryFromId(string("category").toString())
         }

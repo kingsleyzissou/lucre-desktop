@@ -73,7 +73,7 @@ internal class EntryStoreTest {
             id3
         )
         store.update(entry5)
-        var old = store.find(id3)
+        val old = store.find(id3)
         assertEquals(old?.amount, entry5.amount)
         assertEquals(old?.type, entry5.type)
         assertEquals(old?.vendor, entry5.vendor)

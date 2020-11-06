@@ -17,10 +17,11 @@ class EntryController : Controller() {
     }
 
     fun filter(predicate: Predicate<Entry>): List<Entry> {
-        return store.where(predicate)
+        return store.where(predicate).sortedByDescending { it.date }
     }
 
     fun chartData(entries: List<Entry>): Map<Category, Double> {
+        if (entries.isEmpty()) return emptyMap()
         return service.expenseCategories(entries)
     }
 
