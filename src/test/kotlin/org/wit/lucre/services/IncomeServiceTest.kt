@@ -42,13 +42,19 @@ internal class IncomeServiceTest {
     }
 
     @Test
-    fun balance() {
+    fun `starting balance is equal to zero`() {
         var balance = service.balance(store.all())
         assertEquals(0F, balance)
     }
 
     @Test
-    fun add() {
+    fun `empty list has a balance of 0`() {
+        var balance = service.balance(ArrayList<Entry>())
+        assertEquals(0F, balance)
+    }
+
+    @Test
+    fun `starting balance of zero plus income of 100 results in balance of 100`() {
         val newEntry = spyk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 100F
@@ -62,7 +68,7 @@ internal class IncomeServiceTest {
     }
 
     @Test
-    fun spend() {
+    fun `starting balance of zero plus expense of 75 results in balance of -75`() {
         val newEntry = mockk<Entry>()
         every { newEntry.id } returns NanoIdUtils.randomNanoId()
         every { newEntry.amount } returns 75F

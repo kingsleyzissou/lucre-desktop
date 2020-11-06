@@ -8,9 +8,10 @@ import java.util.function.Predicate
 
 class IncomeService() {
 
-    val categoryStore = CategoryStore()
+    private val categoryStore = CategoryStore()
 
     fun balance(entries: List<Entry>): Float {
+        if (entries.isEmpty()) return 0F
         return entries
             .map { it.signedAmount }
             .reduce { acc, it -> acc + it }
