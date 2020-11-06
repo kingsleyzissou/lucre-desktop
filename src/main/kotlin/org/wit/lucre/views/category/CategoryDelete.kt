@@ -43,7 +43,7 @@ class CategoryDelete : Fragment("Category Delete") {
                     button("Delete") {
                         action {
                             confirm(
-                                "Delete category",
+                                "Delete vault",
                                 "Are you sure?",
                                 actionFn = { delete() }
                             )
