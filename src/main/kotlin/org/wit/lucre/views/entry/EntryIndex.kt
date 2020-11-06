@@ -1,7 +1,6 @@
 package org.wit.lucre.views.entry
 
 import javafx.collections.FXCollections
-import org.wit.lucre.controllers.EntryController
 import org.wit.lucre.events.EntriesFilterEvent
 import org.wit.lucre.events.SwitchScenesRequest
 import org.wit.lucre.models.Entry
