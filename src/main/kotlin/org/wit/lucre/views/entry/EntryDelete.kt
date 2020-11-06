@@ -4,11 +4,8 @@ import javafx.geometry.Pos
 import javafx.scene.text.Font
 import org.wit.lucre.controllers.EntryController
 import org.wit.lucre.controllers.VaultController
-import org.wit.lucre.utilities.toHexString
 import org.wit.lucre.viewmodels.EntryModel
 import org.wit.lucre.viewmodels.VaultModel
-import org.wit.lucre.views.category.CategoryEdit
-import org.wit.lucre.views.category.CategoryIndex
 import org.wit.lucre.views.vault.VaultShow
 import tornadofx.*
 

@@ -8,7 +8,6 @@ import tornadofx.getProperty
 import tornadofx.property
 import tornadofx.string
 import javax.json.JsonObject
-import kotlin.reflect.typeOf
 
 class Category(
     name: String? = null,

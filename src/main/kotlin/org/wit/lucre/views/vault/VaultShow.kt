@@ -36,7 +36,7 @@ class VaultShow : Fragment("Show Vault") {
                 font = Font(20.0)
                 subscribe<EntriesFilterEvent> {
                     val balance = entryController.balance(it.entries)
-                    text = "${model.name.value} (${model.currency.value}${balance})"
+                    text = "${model.name.value} (${model.currency.value}$balance)"
                 }
             }
             hbox {

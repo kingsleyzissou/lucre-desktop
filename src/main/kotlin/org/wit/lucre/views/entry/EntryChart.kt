@@ -20,5 +20,4 @@ class EntryChart : Fragment("Chart View") {
             }
         }
     }
-
 }

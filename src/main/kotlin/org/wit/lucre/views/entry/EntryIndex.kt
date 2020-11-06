@@ -1,18 +1,13 @@
 package org.wit.lucre.views.entry
 
 import javafx.collections.FXCollections
-import javafx.scene.control.Alert
-import javafx.scene.control.ButtonType
 import org.wit.lucre.controllers.EntryController
 import org.wit.lucre.events.EntriesFilterEvent
-import org.wit.lucre.events.EntriesFilterRequest
-import org.wit.lucre.events.LoadEntriesRequest
 import org.wit.lucre.events.SwitchScenesRequest
 import org.wit.lucre.models.Entry
 import org.wit.lucre.viewmodels.EntryModel
 import org.wit.lucre.viewmodels.VaultModel
 import tornadofx.*
-import java.util.function.Predicate
 
 class EntryIndex : Fragment("List Entries") {
     private val entryController: EntryController by inject()
@@ -57,7 +52,7 @@ class EntryIndex : Fragment("List Entries") {
     private fun switch(selectedItem: Entry, action: String) {
         val scope = Scope()
         setInScope(EntryModel(selectedItem), scope)
-        val view = when(action) {
+        val view = when (action) {
             "delete" -> find(EntryDelete::class, scope)
             else -> find(EntryEdit::class, scope)
         }
